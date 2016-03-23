@@ -8,6 +8,17 @@
         </fileset>
       </configuration>
     </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="" />
+        <datasource-mapping>
+          <factory-entry name="entityManagerFactory" value="dataSource" />
+          <factory-entry name="wesouthPU" />
+        </datasource-mapping>
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/java/METAINF/persistence.xml" />
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -38,6 +49,21 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:jcl-over-slf4j:1.7.1" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-entitymanager:3.3.2.GA" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate:3.2.6.ga" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache:1.2.3" level="project" />
+    <orderEntry type="library" name="Maven: javax.transaction:jta:1.0.1B" level="project" />
+    <orderEntry type="library" name="Maven: asm:asm-attrs:1.5.3" level="project" />
+    <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: antlr:antlr:2.7.6" level="project" />
+    <orderEntry type="library" name="Maven: cglib:cglib:2.1_3" level="project" />
+    <orderEntry type="library" name="Maven: asm:asm:1.5.3" level="project" />
+    <orderEntry type="library" name="Maven: commons-collections:commons-collections:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-annotations:3.3.1.GA" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-commons-annotations:3.0.0.ga" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:ejb3-persistence:1.0.1.GA" level="project" />
+    <orderEntry type="library" name="Maven: javassist:javassist:3.4.GA" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.6" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-test:4.2.1.RELEASE" level="project" />
