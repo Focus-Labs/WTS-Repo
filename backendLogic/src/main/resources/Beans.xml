@@ -9,13 +9,41 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:annotation-config/>
+    <!-- Scans the classpath for annotated components that will be auto-registered as Spring beans -->
+    <context:component-scan base-package="com.focuslabs.wts.service"/>
+    <!-- Activates various annotations to be detected in bean classes e.g: @Autowired -->
+    <context:annotation-config />
 
     <!--configure entity manager factory bean-->
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="wetravelsouthcontrollersPU" />
+        <property name="jpaPropertyMap">
+            <map>
+                <entry key="eclipselink.weaving" value="false" />
+            </map>
+        </property>
+
+        <!-- package of our entities -->
+        <property name="packagesToScan" value="com.focuslabs.wts.entity"/>
         <property name="dataSource" ref="dataSource" />
+
+        <property name="jpaVendorAdapter">
+
+            <bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+                <property name="databasePlatform" value="org.eclipse.persistence.platform.database.MySQLPlatform"/>
+
+            </bean>
+
+        </property>
+
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+                <prop key="javax.persistence.schema-generation.database.action">none</prop>
+                <prop key="hibernate.ejb.use_class_enhancer">true</prop>
+            </props>
+        </property>
+
     </bean>
 
     <jpa:repositories base-package="com.focuslabs.wts.repository" />
@@ -28,11 +56,12 @@
         <property name="password" value="password"/>
     </bean>
 
+    <!-- Transactions -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-    <!--<context:component-scan base-package=""/>-->
+    <!-- enable the configuration of transactional behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>

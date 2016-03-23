@@ -115,7 +115,7 @@
     </dependencies>
 
     <build>
-        <finalName>WeTravelSouthController</finalName>
+        <finalName>WeTravelSouthLogic</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
