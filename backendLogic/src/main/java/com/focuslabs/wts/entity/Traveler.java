@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
-
+/**
+ * Created by aman on 3/23/16.
+ */
 @Entity
 public class Traveler implements Serializable{
     private static final long serialVersionUID = 1L;

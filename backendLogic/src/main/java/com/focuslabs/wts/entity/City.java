@@ -2,7 +2,9 @@ package com.focuslabs.wts.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
+/**
+ * Created by aman on 3/23/16.
+ */
 @Entity
 public class City implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -12,14 +14,13 @@ public class City implements Serializable {
     private String name;
 
     @OneToOne
-    private String countryId;
+    private Country country;
 
     public City() {
     }
 
-    public City(String name, String countryId) {
+    public City(String name) {
         this.name = name;
-        this.countryId = countryId;
     }
 
     public Long getId() {
@@ -38,12 +39,12 @@ public class City implements Serializable {
         this.name = name;
     }
 
-    public String getCountryId() {
-        return countryId;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setCountryId(String countryId) {
-        this.countryId = countryId;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     @Override

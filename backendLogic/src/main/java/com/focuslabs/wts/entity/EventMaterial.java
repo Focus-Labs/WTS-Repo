@@ -2,7 +2,9 @@ package com.focuslabs.wts.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
+/**
+ * Created by aman on 3/23/16.
+ */
 @Entity
 public class EventMaterial implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -11,24 +13,21 @@ public class EventMaterial implements Serializable {
     private Long id;
 
     @ManyToOne
-    private Long eventId;
+    private Event event;
     private String materialLocation;
     private String description;
     private String materialType;
 
     @OneToOne
-    private Long travelerId;
+    private Traveler traveler;
 
     public EventMaterial() {
     }
 
-    public EventMaterial(Long eventId, String materialLocation, String description, String materialType,
-                         Long travelerId) {
-        this.eventId = eventId;
+    public EventMaterial(String materialLocation, String description, String materialType) {
         this.materialLocation = materialLocation;
         this.description = description;
         this.materialType = materialType;
-        this.travelerId = travelerId;
     }
 
     public Long getId() {
@@ -39,12 +38,20 @@ public class EventMaterial implements Serializable {
         this.id = id;
     }
 
-    public Long getEventId() {
-        return eventId;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Traveler getTraveler() {
+        return traveler;
+    }
+
+    public void setTraveler(Traveler traveler) {
+        this.traveler = traveler;
     }
 
     public String getMaterialLocation() {
@@ -69,14 +76,6 @@ public class EventMaterial implements Serializable {
 
     public void setMaterialType(String materialType) {
         this.materialType = materialType;
-    }
-
-    public Long getTravelerId() {
-        return travelerId;
-    }
-
-    public void setTravelerId(Long travelerId) {
-        this.travelerId = travelerId;
     }
 
     @Override

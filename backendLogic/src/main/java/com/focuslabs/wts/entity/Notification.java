@@ -3,7 +3,9 @@ package com.focuslabs.wts.entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
-
+/**
+ * Created by aman on 3/23/16.
+ */
 @Entity
 public class Notification implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -13,10 +15,10 @@ public class Notification implements Serializable {
 
     @OneToOne
     @Column(nullable=true)
-    private Long travelerId;
+    private Traveler traveler;
     @OneToOne
     @Column(nullable=true)
-    private Long localId;
+    private Local local;
     private String notif_message;
     private Date date;
     private boolean flag_read;
@@ -24,10 +26,9 @@ public class Notification implements Serializable {
     public Notification() {
     }
 
-    public Notification(Long id, Long travelerId, Long localId, String notif_message, Date date, boolean flag_read) {
-        this.id = id;
-        this.travelerId = travelerId;
-        this.localId = localId;
+    public Notification(Traveler traveler, Local local, String notif_message, Date date, boolean flag_read) {
+        this.traveler = traveler;
+        this.local = local;
         this.notif_message = notif_message;
         this.date = date;
         this.flag_read = flag_read;
@@ -41,20 +42,20 @@ public class Notification implements Serializable {
         this.id = id;
     }
 
-    public Long getTravelerId() {
-        return travelerId;
+    public Traveler getTraveler() {
+        return traveler;
     }
 
-    public void setTravelerId(Long travelerId) {
-        this.travelerId = travelerId;
+    public void setTraveler(Traveler traveler) {
+        this.traveler = traveler;
     }
 
-    public Long getLocalId() {
-        return localId;
+    public Local getLocal() {
+        return local;
     }
 
-    public void setLocalId(Long localId) {
-        this.localId = localId;
+    public void setLocal(Local local) {
+        this.local = local;
     }
 
     public String getNotif_message() {

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
-
+/**
+ * Created by aman on 3/23/16.
+ */
 @Entity
 public class Event implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -19,7 +21,7 @@ public class Event implements Serializable{
     private String long_desc;
     private String  where;
     private String event_icon_Location;
-    private ArrayList<String> event_pic_Location;
+    private String event_pic_Location;
 
     @ManyToMany(mappedBy="eventsPartic")
     private List<Traveler> travelers = new ArrayList<Traveler>();
@@ -37,7 +39,7 @@ public class Event implements Serializable{
     }
 
     public Event(Long id, String title, Date date, String length, String short_desc, String long_desc, String where,
-                 String event_icon_Location, ArrayList<String> event_pic_Location) {
+                 String event_icon_Location, String event_pic_Location) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -113,11 +115,11 @@ public class Event implements Serializable{
         this.event_icon_Location = event_icon_Location;
     }
 
-    public ArrayList<String> getEvent_pic_Location() {
+    public String getEvent_pic_Location() {
         return event_pic_Location;
     }
 
-    public void setEvent_pic_Location(ArrayList<String> event_pic_Location) {
+    public void setEvent_pic_Location(String event_pic_Location) {
         this.event_pic_Location = event_pic_Location;
     }
 
@@ -135,6 +137,22 @@ public class Event implements Serializable{
 
     public void setEventMaterials(List<EventMaterial> eventMaterials) {
         this.eventMaterials = eventMaterials;
+    }
+
+    public List<Traveler> getTravelers() {
+        return travelers;
+    }
+
+    public void setTravelers(List<Traveler> travelers) {
+        this.travelers = travelers;
+    }
+
+    public List<Local> getLocals() {
+        return locals;
+    }
+
+    public void setLocals(List<Local> locals) {
+        this.locals = locals;
     }
 
     @Override

@@ -2,7 +2,9 @@ package com.focuslabs.wts.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
+/**
+ * Created by aman on 3/23/16.
+ */
 @Entity
 public class WhereAbout implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -10,18 +12,16 @@ public class WhereAbout implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne
-    private Long travelerId;
+    private Traveler traveler;
     @OneToOne
-    private Long cityId;
+    private City city;
     private String from;
     private String to;
 
     public WhereAbout() {
     }
 
-    public WhereAbout(Long travelerId, Long cityId, String from, String to) {
-        this.travelerId = travelerId;
-        this.cityId = cityId;
+    public WhereAbout(String from, String to) {
         this.from = from;
         this.to = to;
     }
@@ -34,20 +34,20 @@ public class WhereAbout implements Serializable {
         this.id = id;
     }
 
-    public Long getTravelerId() {
-        return travelerId;
+    public Traveler getTraveler() {
+        return traveler;
     }
 
-    public void setTravelerId(Long travelerId) {
-        this.travelerId = travelerId;
+    public void setTraveler(Traveler traveler) {
+        this.traveler = traveler;
     }
 
-    public Long getCityId() {
-        return cityId;
+    public City getCity() {
+        return city;
     }
 
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public String getFrom() {
