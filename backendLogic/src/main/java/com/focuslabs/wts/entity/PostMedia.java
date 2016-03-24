@@ -2,7 +2,9 @@ package com.focuslabs.wts.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
+/**
+ * Created by aman on 3/23/16.
+ */
 @Entity
 public class PostMedia implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -11,15 +13,14 @@ public class PostMedia implements Serializable {
     private Long id;
 
     @OneToOne
-    private Long postId;
+    private Post post;
     private String resourceLocation;
     private String resourceType;
 
     public PostMedia() {
     }
 
-    public PostMedia(Long postId, String resourceLocation, String resourceType) {
-        this.postId = postId;
+    public PostMedia(String resourceLocation, String resourceType) {
         this.resourceLocation = resourceLocation;
         this.resourceType = resourceType;
     }
@@ -32,12 +33,12 @@ public class PostMedia implements Serializable {
         this.id = id;
     }
 
-    public Long getPostId() {
-        return postId;
+    public Post getPost() {
+        return post;
     }
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public String getResourceLocation() {

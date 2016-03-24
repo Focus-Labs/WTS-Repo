@@ -2,7 +2,9 @@ package com.focuslabs.wts.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
+/**
+ * Created by aman on 3/23/16.
+ */
 @Entity
 public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -11,14 +13,13 @@ public class Post implements Serializable {
     private Long id;
 
     @ManyToOne
-    private Long eventId;
+    private Event event;
     private String postText;
 
     public Post() {
     }
 
-    public Post(Long eventId, String postText) {
-        this.eventId = eventId;
+    public Post(String postText) {
         this.postText = postText;
     }
 
@@ -30,12 +31,12 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public Long getEventId() {
-        return eventId;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
     public String getPostText() {

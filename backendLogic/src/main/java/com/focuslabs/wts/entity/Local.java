@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
-
+/**
+ * Created by aman on 3/23/16.
+ */
 @Entity
-public class Local implements Serializable{
+public class Local extends Account implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +18,7 @@ public class Local implements Serializable{
     private String companyName;
     private Date startedDate;
     private Long cityId;
-    private ArrayList<String> exactLocation;        // street and address
+    private String address;
     private Integer rating;
     private String email;
     private String phoneNo;
@@ -32,17 +34,20 @@ public class Local implements Serializable{
     public Local() {
     }
 
-    public Local(String spokesPersonName, String companyName, Date startedDate, Long cityId,
-                 ArrayList<String> exactLocation, Integer rating, String email, String phoneNo, String logoPicLocation) {
+    public Local(String spokesPersonName, String companyName, Date startedDate, Long cityId, String address,
+                 Integer rating, String email, String phoneNo, String logoPicLocation, List<Event> eventsCollabo,
+                 List<Relationship> relationships) {
         this.spokesPersonName = spokesPersonName;
         this.companyName = companyName;
         this.startedDate = startedDate;
         this.cityId = cityId;
-        this.exactLocation = exactLocation;
+        this.address = address;
         this.rating = rating;
         this.email = email;
         this.phoneNo = phoneNo;
         this.logoPicLocation = logoPicLocation;
+        this.eventsCollabo = eventsCollabo;
+        this.relationships = relationships;
     }
 
     public Long getId() {
@@ -85,16 +90,24 @@ public class Local implements Serializable{
         this.cityId = cityId;
     }
 
-    public ArrayList<String> getExactLocation() {
-        return exactLocation;
+    public String getAddress() {
+        return address;
     }
 
-    public void setExactLocation(ArrayList<String> exactLocation) {
-        this.exactLocation = exactLocation;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Integer getRating() {
         return rating;
+    }
+
+    public List<Event> getEventsCollabo() {
+        return eventsCollabo;
+    }
+
+    public void setEventsCollabo(List<Event> eventsCollabo) {
+        this.eventsCollabo = eventsCollabo;
     }
 
     public void setRating(Integer rating) {

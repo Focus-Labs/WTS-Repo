@@ -3,7 +3,9 @@ package com.focuslabs.wts.entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
-
+/**
+ * Created by aman on 3/23/16.
+ */
 @Entity
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
