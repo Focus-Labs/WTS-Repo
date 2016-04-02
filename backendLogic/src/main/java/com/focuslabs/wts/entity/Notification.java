@@ -14,11 +14,9 @@ public class Notification implements Serializable {
     private Long id;
 
     @OneToOne
-    @Column(nullable=true)
-    private Traveler traveler;
+    private Account fromAccount;
     @OneToOne
-    @Column(nullable=true)
-    private Local local;
+    private Account toAccount;
     private String notif_message;
     private Date date;
     private boolean flag_read;
@@ -26,9 +24,9 @@ public class Notification implements Serializable {
     public Notification() {
     }
 
-    public Notification(Traveler traveler, Local local, String notif_message, Date date, boolean flag_read) {
-        this.traveler = traveler;
-        this.local = local;
+    public Notification(Account fromAccount, Account toAccount, String notif_message, Date date, boolean flag_read) {
+        this.fromAccount = fromAccount;
+        this.toAccount = toAccount;
         this.notif_message = notif_message;
         this.date = date;
         this.flag_read = flag_read;
@@ -42,20 +40,20 @@ public class Notification implements Serializable {
         this.id = id;
     }
 
-    public Traveler getTraveler() {
-        return traveler;
+    public Account getFromAccount() {
+        return fromAccount;
     }
 
-    public void setTraveler(Traveler traveler) {
-        this.traveler = traveler;
+    public void setFromAccount(Account fromAccount) {
+        this.fromAccount = fromAccount;
     }
 
-    public Local getLocal() {
-        return local;
+    public Account getToAccount() {
+        return toAccount;
     }
 
-    public void setLocal(Local local) {
-        this.local = local;
+    public void setToAccount(Account toAccount) {
+        this.toAccount = toAccount;
     }
 
     public String getNotif_message() {

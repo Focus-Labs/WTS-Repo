@@ -19,7 +19,10 @@ public class Event implements Serializable{
     private String length;
     private String short_desc;
     private String long_desc;
-    private String  where;
+    private String where;
+
+    @OneToOne
+    private City city;
     private String event_icon_Location;
     private String event_pic_Location;
 
@@ -38,17 +41,22 @@ public class Event implements Serializable{
     public Event() {
     }
 
-    public Event(Long id, String title, Date date, String length, String short_desc, String long_desc, String where,
-                 String event_icon_Location, String event_pic_Location) {
-        this.id = id;
+    public Event(String title, Date date, String length, String short_desc, String long_desc, String where, City city,
+                 String event_icon_Location, String event_pic_Location, List<Traveler> travelers, List<Local> locals,
+                 List<Post> posts, List<EventMaterial> eventMaterials) {
         this.title = title;
         this.date = date;
         this.length = length;
         this.short_desc = short_desc;
         this.long_desc = long_desc;
         this.where = where;
+        this.city = city;
         this.event_icon_Location = event_icon_Location;
         this.event_pic_Location = event_pic_Location;
+        this.travelers = travelers;
+        this.locals = locals;
+        this.posts = posts;
+        this.eventMaterials = eventMaterials;
     }
 
     public Long getId() {
@@ -107,6 +115,14 @@ public class Event implements Serializable{
         this.where = where;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     public String getEvent_icon_Location() {
         return event_icon_Location;
     }
@@ -123,22 +139,6 @@ public class Event implements Serializable{
         this.event_pic_Location = event_pic_Location;
     }
 
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
-
-    public List<EventMaterial> getEventMaterials() {
-        return eventMaterials;
-    }
-
-    public void setEventMaterials(List<EventMaterial> eventMaterials) {
-        this.eventMaterials = eventMaterials;
-    }
-
     public List<Traveler> getTravelers() {
         return travelers;
     }
@@ -153,6 +153,22 @@ public class Event implements Serializable{
 
     public void setLocals(List<Local> locals) {
         this.locals = locals;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<EventMaterial> getEventMaterials() {
+        return eventMaterials;
+    }
+
+    public void setEventMaterials(List<EventMaterial> eventMaterials) {
+        this.eventMaterials = eventMaterials;
     }
 
     @Override

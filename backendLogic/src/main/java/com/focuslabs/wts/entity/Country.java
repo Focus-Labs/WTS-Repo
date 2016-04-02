@@ -1,6 +1,8 @@
 package com.focuslabs.wts.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 /**
  * Created by aman on 3/23/16.
@@ -13,11 +15,15 @@ public class Country implements Serializable {
     private Long id;
     private String name;
 
+    @OneToMany
+    private List<City> cities = new ArrayList<City>();
+
     public Country() {
     }
 
-    public Country(String name) {
+    public Country(String name, List<City> cities) {
         this.name = name;
+        this.cities = cities;
     }
 
     public Long getId() {
@@ -34,6 +40,14 @@ public class Country implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
     }
 
     @Override

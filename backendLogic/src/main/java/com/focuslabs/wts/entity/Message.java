@@ -14,11 +14,9 @@ public class Message implements Serializable {
     private Long id;
 
     @OneToOne
-    private Long fromAccountId;
-    private String fromAccountType;
+    private Account fromAccount;
     @OneToOne
-    private Long toAccountId;
-    private String toAccountType;
+    private Account toAccount;
     private String message;
     private Date date;
     private boolean flag_read;
@@ -26,13 +24,9 @@ public class Message implements Serializable {
     public Message() {
     }
 
-    public Message(Long id, Long fromAccountId, String fromAccountType, Long toAccountId, String toAccountType,
-                   String message, Date date, boolean flag_read) {
-        this.id = id;
-        this.fromAccountId = fromAccountId;
-        this.fromAccountType = fromAccountType;
-        this.toAccountId = toAccountId;
-        this.toAccountType = toAccountType;
+    public Message(Account fromAccount, Account toAccount, String message, Date date, boolean flag_read) {
+        this.fromAccount = fromAccount;
+        this.toAccount = toAccount;
         this.message = message;
         this.date = date;
         this.flag_read = flag_read;
@@ -46,36 +40,20 @@ public class Message implements Serializable {
         this.id = id;
     }
 
-    public Long getFromAccountId() {
-        return fromAccountId;
+    public Account getFromAccount() {
+        return fromAccount;
     }
 
-    public void setFromAccountId(Long fromAccountId) {
-        this.fromAccountId = fromAccountId;
+    public void setFromAccount(Account fromAccount) {
+        this.fromAccount = fromAccount;
     }
 
-    public String getFromAccountType() {
-        return fromAccountType;
+    public Account getToAccount() {
+        return toAccount;
     }
 
-    public void setFromAccountType(String fromAccountType) {
-        this.fromAccountType = fromAccountType;
-    }
-
-    public Long getToAccountId() {
-        return toAccountId;
-    }
-
-    public void setToAccountId(Long toAccountId) {
-        this.toAccountId = toAccountId;
-    }
-
-    public String getToAccountType() {
-        return toAccountType;
-    }
-
-    public void setToAccountType(String toAccountType) {
-        this.toAccountType = toAccountType;
+    public void setToAccount(Account toAccount) {
+        this.toAccount = toAccount;
     }
 
     public String getMessage() {

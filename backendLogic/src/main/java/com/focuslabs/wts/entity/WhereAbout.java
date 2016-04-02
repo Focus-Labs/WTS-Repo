@@ -1,6 +1,7 @@
 package com.focuslabs.wts.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 /**
  * Created by aman on 3/23/16.
@@ -15,15 +16,17 @@ public class WhereAbout implements Serializable {
     private Traveler traveler;
     @OneToOne
     private City city;
-    private String from;
-    private String to;
+    private Date fromDate;
+    private Date toDate;
 
     public WhereAbout() {
     }
 
-    public WhereAbout(String from, String to) {
-        this.from = from;
-        this.to = to;
+    public WhereAbout(Traveler traveler, City city, Date fromDate, Date toDate) {
+        this.traveler = traveler;
+        this.city = city;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
     }
 
     public Long getId() {
@@ -50,20 +53,20 @@ public class WhereAbout implements Serializable {
         this.city = city;
     }
 
-    public String getFrom() {
-        return from;
+    public Date getFromDate() {
+        return fromDate;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
     }
 
-    public String getTo() {
-        return to;
+    public Date getToDate() {
+        return toDate;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
     }
 
     @Override

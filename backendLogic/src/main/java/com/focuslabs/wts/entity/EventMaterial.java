@@ -11,9 +11,6 @@ public class EventMaterial implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @ManyToOne
-    private Event event;
     private String materialLocation;
     private String description;
     private String materialType;
@@ -24,10 +21,11 @@ public class EventMaterial implements Serializable {
     public EventMaterial() {
     }
 
-    public EventMaterial(String materialLocation, String description, String materialType) {
+    public EventMaterial(String materialLocation, String description, String materialType, Traveler traveler) {
         this.materialLocation = materialLocation;
         this.description = description;
         this.materialType = materialType;
+        this.traveler = traveler;
     }
 
     public Long getId() {
@@ -36,22 +34,6 @@ public class EventMaterial implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
-    public Traveler getTraveler() {
-        return traveler;
-    }
-
-    public void setTraveler(Traveler traveler) {
-        this.traveler = traveler;
     }
 
     public String getMaterialLocation() {
@@ -76,6 +58,14 @@ public class EventMaterial implements Serializable {
 
     public void setMaterialType(String materialType) {
         this.materialType = materialType;
+    }
+
+    public Traveler getTraveler() {
+        return traveler;
+    }
+
+    public void setTraveler(Traveler traveler) {
+        this.traveler = traveler;
     }
 
     @Override

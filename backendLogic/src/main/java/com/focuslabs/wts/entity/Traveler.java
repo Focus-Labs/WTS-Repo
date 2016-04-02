@@ -9,38 +9,36 @@ import javax.persistence.*;
  * Created by aman on 3/23/16.
  */
 @Entity
-public class Traveler extends Account implements Serializable{
+public class Traveler implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String fullName;
     private Date dateOfBirth;
-    private String country;
-    private String city;
+
+    @OneToOne
+    private City city;
     private Integer rating;
-    private String email;
     private String profilePicLocation;
+
+    @OneToOne
+    private Account account;
 
     @ManyToMany
     @JoinTable(name = "Participant")
     private List<Event> eventsPartic = new ArrayList<Event>();
 
-    @OneToMany
-    private List<Relationship> relationships = new ArrayList<Relationship>();
-
     public Traveler() {
     }
 
-    public Traveler(String fullName, Date dateOfBirth, String country, String city, Integer rating,
-                    String email, String profilePicLocation) {
-        this.fullName = fullName;
+    public Traveler(Date dateOfBirth, City city, Integer rating, String profilePicLocation, Account account,
+                    List<Event> eventsPartic) {
         this.dateOfBirth = dateOfBirth;
-        this.country = country;
         this.city = city;
         this.rating = rating;
-        this.email = email;
         this.profilePicLocation = profilePicLocation;
+        this.account = account;
+        this.eventsPartic = eventsPartic;
     }
 
     public Long getId() {
@@ -51,14 +49,6 @@ public class Traveler extends Account implements Serializable{
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -67,19 +57,11 @@ public class Traveler extends Account implements Serializable{
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
@@ -91,14 +73,6 @@ public class Traveler extends Account implements Serializable{
         this.rating = rating;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getProfilePicLocation() {
         return profilePicLocation;
     }
@@ -107,20 +81,20 @@ public class Traveler extends Account implements Serializable{
         this.profilePicLocation = profilePicLocation;
     }
 
-    public List<Event> getEvents() {
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public List<Event> getEventsPartic() {
         return eventsPartic;
     }
 
-    public void setEvents(List<Event> events) {
-        this.eventsPartic = events;
-    }
-
-    public List<Relationship> getRelationships() {
-        return relationships;
-    }
-
-    public void setRelationships(List<Relationship> relationships) {
-        this.relationships = relationships;
+    public void setEventsPartic(List<Event> eventsPartic) {
+        this.eventsPartic = eventsPartic;
     }
 
     @Override

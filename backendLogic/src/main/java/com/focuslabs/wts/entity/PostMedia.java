@@ -11,9 +11,6 @@ public class PostMedia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @OneToOne
-    private Post post;
     private String resourceLocation;
     private String resourceType;
 
@@ -31,14 +28,6 @@ public class PostMedia implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
     }
 
     public String getResourceLocation() {

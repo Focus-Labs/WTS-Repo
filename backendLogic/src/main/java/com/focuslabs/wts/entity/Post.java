@@ -1,6 +1,8 @@
 package com.focuslabs.wts.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 /**
  * Created by aman on 3/23/16.
@@ -11,16 +13,17 @@ public class Post implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @ManyToOne
-    private Event event;
     private String postText;
+
+    @OneToMany
+    private List<PostMedia> postMedias = new ArrayList<PostMedia>();
 
     public Post() {
     }
 
-    public Post(String postText) {
+    public Post(String postText, List<PostMedia> postMedias) {
         this.postText = postText;
+        this.postMedias = postMedias;
     }
 
     public Long getId() {
@@ -31,20 +34,20 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
     public String getPostText() {
         return postText;
     }
 
     public void setPostText(String postText) {
         this.postText = postText;
+    }
+
+    public List<PostMedia> getPostMedias() {
+        return postMedias;
+    }
+
+    public void setPostMedias(List<PostMedia> postMedias) {
+        this.postMedias = postMedias;
     }
 
     @Override
