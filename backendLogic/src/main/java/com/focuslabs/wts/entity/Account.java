@@ -18,6 +18,10 @@ public class Account implements Serializable{
     private String password;
     private String email;
     private Integer type;
+    private boolean active;
+
+    public static final int LOCAL = 0,TRAVELER = 1;
+    public static final boolean DORMANT = false,ACTIVE = true;
 
     @ManyToMany
     @JoinTable(name = "Relationship",
@@ -26,6 +30,22 @@ public class Account implements Serializable{
     private List<Account> accounts = new ArrayList<Account>();
 
     public Account() {
+    }
+
+    /**
+     * constructor for creating account
+     *
+     * @param name
+     * @param password
+     * @param email
+     * @param type
+     */
+    public Account(String name, String password, String email, Integer type,boolean active) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.type = type;
+        this.active = active;
     }
 
     public Account(String name, String password, String email, Integer type, List<Account> accounts) {
@@ -74,6 +94,14 @@ public class Account implements Serializable{
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public List<Account> getAccounts() {
