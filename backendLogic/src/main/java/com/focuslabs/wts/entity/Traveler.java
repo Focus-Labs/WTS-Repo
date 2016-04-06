@@ -31,6 +31,21 @@ public class Traveler implements Serializable{
     public Traveler() {
     }
 
+    /**
+     * constructor for creating traveler account
+     *
+     * @param dateOfBirth
+     * @param city
+     * @param profilePicLocation
+     * @param account
+     */
+    public Traveler(Date dateOfBirth, City city, String profilePicLocation, Account account) {
+        this.dateOfBirth = dateOfBirth;
+        this.city = city;
+        this.profilePicLocation = profilePicLocation;
+        this.account = account;
+    }
+
     public Traveler(Date dateOfBirth, City city, Integer rating, String profilePicLocation, Account account,
                     List<Event> eventsPartic) {
         this.dateOfBirth = dateOfBirth;
