@@ -1,4 +1,4 @@
-package com.focuslabs.wts.service;
+package com.focuslabs.wts.service.imp;
 
 import com.focuslabs.wts.entity.Event;
 import com.focuslabs.wts.entity.Post;
@@ -6,6 +6,7 @@ import com.focuslabs.wts.entity.Traveler;
 import com.focuslabs.wts.repository.EventDAO;
 import com.focuslabs.wts.repository.PostDAO;
 import com.focuslabs.wts.repository.TravelerDAO;
+import com.focuslabs.wts.service.ISearchService;
 import com.focuslabs.wts.vo.EventVO;
 import com.focuslabs.wts.vo.PostVO;
 import com.focuslabs.wts.vo.SearchResultVO;
