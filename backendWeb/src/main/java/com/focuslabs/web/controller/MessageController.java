@@ -1,5 +1,6 @@
 package com.focuslabs.web.controller;
 
+<<<<<<< HEAD
 import com.focuslabs.wts.entity.Account;
 import com.focuslabs.wts.service.IMessageService;
 import com.focuslabs.wts.vo.MessageVO;
@@ -54,4 +55,10 @@ public class MessageController {
         }
     }
 
+=======
+/**
+ * Created by mel on 4/5/2016.
+ */
+public class MessageController {
+>>>>>>> 6c3bb111e8da25929ae55c03f030eff73fd2b323
 }

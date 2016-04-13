@@ -34,6 +34,16 @@ public class Local implements Serializable{
     public Local() {
     }
 
+    public Local(String companyName, Date startedDate, City city, String address, String phoneNo, String logoPicLocation, Account account) {
+        this.companyName = companyName;
+        this.startedDate = startedDate;
+        this.city = city;
+        this.address = address;
+        this.phoneNo = phoneNo;
+        this.logoPicLocation = logoPicLocation;
+        this.account = account;
+    }
+
     public Local(String companyName, Date startedDate, City city, String address, Integer rating, String phoneNo,
                  String logoPicLocation, Account account, List<Event> eventsCollabo) {
         this.companyName = companyName;
