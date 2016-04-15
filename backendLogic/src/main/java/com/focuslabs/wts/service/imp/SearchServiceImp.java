@@ -67,9 +67,9 @@ public class SearchServiceImp implements ISearchService {
                 travelerDAO.findAll()) {
             for (String s :
                     q) {
-                if (traveler.getFullName().contains(s)) {
-                    searchResults.add(new TravelerVO(traveler));
-                }
+//                if (traveler.getFullName().contains(s)) {
+//                    searchResults.add(new TravelerVO(traveler));
+//                }
                 break;
             }
         }
