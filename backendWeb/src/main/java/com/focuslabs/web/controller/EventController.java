@@ -1,11 +1,11 @@
 package com.focuslabs.web.controller;
 
-<<<<<<< HEAD
 import com.focuslabs.wts.entity.Account;
 import com.focuslabs.wts.entity.Traveler;
 import com.focuslabs.wts.service.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,26 +22,15 @@ import java.util.List;
 /**
  * Created by melkamu on 3/30/2016.
  */
-=======
-import com.focuslabs.wts.service.IEventService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * Created by baba on 4/4/2016.
- */
 @Controller
 @RequestMapping("/events")
->>>>>>> 6c3bb111e8da25929ae55c03f030eff73fd2b323
+
 public class EventController {
 
     @Autowired
     IEventService eventService;
 
-<<<<<<< HEAD
     @RequestMapping("/inviteToEvent")
     @ResponseBody
     public int inviteToEvent(@RequestParam(value = "inviter", defaultValue = "") Account inviter,
@@ -111,7 +100,7 @@ public class EventController {
     @RequestMapping("/postToEvent")
     @ResponseBody
     public String postToEvent(@RequestParam(value = "accountId", defaultValue = "") Account accountId,
-                           @RequestParam(value = "data", defaultValue = "") MultipartFile[] data) {
+                              @RequestParam(value = "data", defaultValue = "") MultipartFile[] data) {
         //TODO: not test
         String materialLocationUrl = null;
         String materialType = null;
@@ -137,7 +126,7 @@ public class EventController {
                     FileCopyUtils.copy(file.getInputStream(), stream);
                     stream.close();
 
-                    eventService.postToEvent(0L,accountId,materialLocationUrl,materialType);
+                    eventService.postToEvent(0L, accountId, materialLocationUrl, materialType);
                     message = "you have successfully uploaded";
                 }
             }
@@ -154,32 +143,5 @@ public class EventController {
     public void vote() {
 
     }
-=======
-    @RequestMapping("/allActiveEvents")
-    @ResponseBody
-    public ResponseEntity<?> allActiveEvents() {
 
-        try {
-            Integer activeMeetings = eventService.getNumberOfActiveMeetings();
-            return new ResponseEntity<Object>("",null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<Object>("Error message",null);
-        }
-    }
-
-    @RequestMapping("/allActiveEventCountries")
-    @ResponseBody
-    public ResponseEntity<?> allActiveEventsCountries() {
-
-        try {
-            Integer activeCountries = eventService.getNumberOfActiveCountry();
-            return new ResponseEntity<Object>("",null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<Object>("Error message",null);
-        }
-    }
-
->>>>>>> 6c3bb111e8da25929ae55c03f030eff73fd2b323
 }

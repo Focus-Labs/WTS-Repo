@@ -1,6 +1,5 @@
 package com.focuslabs.web.controller;
 
-<<<<<<< HEAD
 import com.focuslabs.wts.entity.Account;
 import com.focuslabs.wts.service.IMessageService;
 import com.focuslabs.wts.vo.MessageVO;
@@ -24,7 +23,7 @@ public class MessageController {
     @RequestMapping("/sendMessage")
     @ResponseBody
 
-    //TODO synchronize unread message
+    //TODO: synchronize unread message
     public int sendMessage(@RequestParam(value = "fromAccountId", defaultValue = "") Account fromAccountId,
                            @RequestParam(value = "toAccountId", defaultValue = "") Account toAccountId,
                            @RequestParam(value = "message", defaultValue = "") String message) {
@@ -54,11 +53,4 @@ public class MessageController {
             return new ResponseEntity<Object>("", HttpStatus.BAD_REQUEST);
         }
     }
-
-=======
-/**
- * Created by mel on 4/5/2016.
- */
-public class MessageController {
->>>>>>> 6c3bb111e8da25929ae55c03f030eff73fd2b323
 }
