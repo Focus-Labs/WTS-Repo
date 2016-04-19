@@ -1,5 +1,7 @@
 package com.focuslabs.wts.vo;
 
+import com.focuslabs.wts.entity.Message;
+
 /**
  * Created by mel on 4/5/2016.
  */

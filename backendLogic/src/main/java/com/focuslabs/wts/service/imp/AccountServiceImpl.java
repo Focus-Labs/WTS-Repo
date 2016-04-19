@@ -4,6 +4,7 @@ import com.focuslabs.wts.entity.Account;
 import com.focuslabs.wts.entity.City;
 import com.focuslabs.wts.entity.Local;
 import com.focuslabs.wts.entity.Traveler;
+import com.focuslabs.wts.libs.Encription;
 import com.focuslabs.wts.repository.AccountDAO;
 import com.focuslabs.wts.repository.CityDAO;
 import com.focuslabs.wts.repository.LocalDAO;
@@ -43,9 +44,9 @@ public class AccountServiceImpl implements IAccountService {
      */
     @Override
     public void createTravelerAccount(TravelerAccountVo tav) throws Exception {
-        Account account = accountDAO.save(new Account(tav.getAccount().getUsername(),tav.getAccount().getPassword(),tav.getAccount().getEmail(),Account.TRAVELER,Account.ACTIVE));
-        if(account != null) {
-            Traveler traveler = travelerDAO.save(new Traveler(tav.getDateOfBirth(),cityDAO.findOne(tav.getCity().getId()),tav.getProfilePicLocation(),account));
+        Account account = accountDAO.save(new Account(tav.getAccount().getUsername(), Encription.encrypt(tav.getAccount().getPassword()), tav.getAccount().getEmail(), Account.TRAVELER, Account.ACTIVE));
+        if (account != null) {
+            Traveler traveler = travelerDAO.save(new Traveler(tav.getDateOfBirth(), cityDAO.findOne(tav.getCity().getId()), tav.getProfilePicLocation(), account));
         }
         throw new Exception(" :( Problem creating Traveler account.");
     }
@@ -59,9 +60,9 @@ public class AccountServiceImpl implements IAccountService {
      */
     @Override
     public void createLocalAccount(LocalAccountVo hav) throws Exception {
-        Account account = accountDAO.save(new Account(hav.getAccount().getUsername(),hav.getAccount().getPassword(),hav.getAccount().getEmail(),Account.LOCAL,Account.ACTIVE));
-        if(account != null) {
-            Local local = localDAO.save(new Local(hav.getCompanyName(),hav.getStartedDate(),cityDAO.findOne(hav.getCity().getId()),hav.getAddress(),hav.getPhoneNo(),hav.getLogoPicLocation(),account));
+        Account account = accountDAO.save(new Account(hav.getAccount().getUsername(), Encription.encrypt(hav.getAccount().getPassword()), hav.getAccount().getEmail(), Account.LOCAL, Account.ACTIVE));
+        if (account != null) {
+            Local local = localDAO.save(new Local(hav.getCompanyName(), hav.getStartedDate(), cityDAO.findOne(hav.getCity().getId()), hav.getAddress(), hav.getPhoneNo(), hav.getLogoPicLocation(), account));
         }
         throw new Exception(" :( Problem creating Local account.");
     }
@@ -75,7 +76,7 @@ public class AccountServiceImpl implements IAccountService {
      */
     @Override
     public void authentication(String userName, String password) throws Exception {
-        Account account = accountDAO.findAccount(userName,password,Account.ACTIVE);
+        Account account = accountDAO.findAccount(userName, Encription.encrypt(password), Account.ACTIVE);
         // TODO create and return sessionVo
     }
 

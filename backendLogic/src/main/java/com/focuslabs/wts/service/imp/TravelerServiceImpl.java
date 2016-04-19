@@ -6,12 +6,16 @@ import com.focuslabs.wts.repository.TravelerDAO;
 import com.focuslabs.wts.repository.WhereAboutDAO;
 import com.focuslabs.wts.service.ITravelerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
 /**
  * Created by baba on 4/4/2016.
  */
+@Service
+@Transactional
 public class TravelerServiceImpl implements ITravelerService {
 
     @Autowired

@@ -12,12 +12,16 @@ import com.focuslabs.wts.vo.PostVO;
 import com.focuslabs.wts.vo.SearchResultVO;
 import com.focuslabs.wts.vo.TravelerVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
 /**
  * Created by Samson Tekleab on 3/24/2016.
  */
+@Service
+@Transactional
 public class SearchServiceImp implements ISearchService {
 
     @Autowired
