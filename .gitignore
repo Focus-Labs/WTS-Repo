@@ -1,2 +1,4 @@
 .idea/
 WeTravelSouth.iml
+*.iml
+backendLogic/target/
