@@ -1,24 +1,22 @@
 package com.focuslabs.wts.service;
 
+import com.focuslabs.wts.entity.Account;
+
+import com.focuslabs.wts.entity.Traveler;
+
 /**
- * Created by baba on 4/4/2016.
+ * Created by melkamu on 3/30/2016.
  */
 public interface IEventService {
 
-    /**
-     * get all active events ( 1 hour before the event until its the event finishes)
-     *
-     * @return total number of active events
-     * @throws Exception
-     */
-    int getNumberOfActiveMeetings() throws Exception;
+    void inviteToEvent(Account inviter, Account invitee);
 
-    /**
-     * get all active event countries ( 1 hour before the event until its the event finishes)
-     *
-     * @return total number of active event countries
-     * @throws Exception
-     */
-    int getNumberOfActiveCountry() throws  Exception;
+    void acceptInvite(Account invitee, Account inviter);
+
+    void uploadToEvent(Long eventId, String description, Traveler traveler, String materialLocation, String materialType);
+
+    void postToEvent(Long eventId, Account accountId, String postMaterialLocation, String postMaterialType);
+
+    void vote(Account voterId, Account targetedAccountId, int amount);
 
 }

@@ -3,7 +3,7 @@ package com.focuslabs.wts.vo;
 import com.focuslabs.wts.entity.Message;
 
 /**
- * Created by mel on 4/5/2016.
+ * Created by melkamu on 3/30/2016.
  */
 public class MessageVO {
 

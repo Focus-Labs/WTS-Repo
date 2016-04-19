@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MessageDAO extends JpaRepository<Message, Long>{
 
+
+
 }
