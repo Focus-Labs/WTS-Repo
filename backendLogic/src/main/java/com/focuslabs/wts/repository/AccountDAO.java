@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccountDAO extends JpaRepository<Account, Long> {
 
-    @Query("SELECT a FROM Account a WHERE a.userName=?1 and a.password=?2 and a.active=?3")
+    @Query("SELECT a FROM Account a WHERE a.email=?1 and a.password=?2 and a.active=?3")
     public Account findAccount(String userName,String password,boolean active);
 
 }

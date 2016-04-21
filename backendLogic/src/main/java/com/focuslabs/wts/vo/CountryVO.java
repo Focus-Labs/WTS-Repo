@@ -54,6 +54,10 @@ public class CountryVO {
         this.cities = cities;
     }
 
+    public CountryVO(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

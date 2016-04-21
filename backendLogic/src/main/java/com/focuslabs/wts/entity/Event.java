@@ -19,7 +19,7 @@ public class Event implements Serializable{
     private String length;
     private String short_desc;
     private String long_desc;
-    private String where;
+    private String where_about;
 
     @OneToOne
     private City city;
@@ -41,7 +41,7 @@ public class Event implements Serializable{
     public Event() {
     }
 
-    public Event(String title, Date date, String length, String short_desc, String long_desc, String where, City city,
+    public Event(String title, Date date, String length, String short_desc, String long_desc, String where_about, City city,
                  String event_icon_Location, String event_pic_Location, List<Traveler> travelers, List<Local> locals,
                  List<Post> posts, List<EventMaterial> eventMaterials) {
         this.title = title;
@@ -49,7 +49,7 @@ public class Event implements Serializable{
         this.length = length;
         this.short_desc = short_desc;
         this.long_desc = long_desc;
-        this.where = where;
+        this.where_about = where_about;
         this.city = city;
         this.event_icon_Location = event_icon_Location;
         this.event_pic_Location = event_pic_Location;
@@ -107,12 +107,12 @@ public class Event implements Serializable{
         this.long_desc = long_desc;
     }
 
-    public String getWhere() {
-        return where;
+    public String getWhere_about() {
+        return where_about;
     }
 
-    public void setWhere(String where) {
-        this.where = where;
+    public void setWhere_about(String where_about) {
+        this.where_about = where_about;
     }
 
     public City getCity() {
