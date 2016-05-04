@@ -1,4 +1,4 @@
-package com.focuslabs.web.controller;
+package com.focuslabs.wts.controller;
 
 import com.focuslabs.wts.service.IAccountService;
 import com.focuslabs.wts.vo.AccountVO;

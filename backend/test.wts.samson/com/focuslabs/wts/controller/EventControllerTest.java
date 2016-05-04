@@ -1,3 +1,5 @@
+package com.focuslabs.wts.controller;
+
 import com.focuslabs.wts.MainApp;
 import org.junit.After;
 import org.junit.Before;
@@ -7,17 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import static org.junit.Assert.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
  * Created by Samson Tekleab on 4/22/2016.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MainApp.class)
-public class MessageControllerTest {
+public class EventControllerTest {
 
     MockMvc mockMvc;
 
@@ -26,7 +26,9 @@ public class MessageControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.mockMvc = webAppContextSetup(webApplicationContext).build();
+
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+
     }
 
     @After
@@ -35,12 +37,27 @@ public class MessageControllerTest {
     }
 
     @Test
-    public void testSendMessage() throws Exception {
+    public void testInviteToEvent() throws Exception {
 
     }
 
     @Test
-    public void testGetConversation() throws Exception {
+    public void testAcceptInvite() throws Exception {
+
+    }
+
+    @Test
+    public void testUploadToEvent() throws Exception {
+
+    }
+
+    @Test
+    public void testPostToEvent() throws Exception {
+
+    }
+
+    @Test
+    public void testVote() throws Exception {
 
     }
 }

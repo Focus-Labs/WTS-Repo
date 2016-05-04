@@ -1,9 +1,6 @@
-package com.focuslabs.web.controller;
+package com.focuslabs.wts.controller;
 
 import com.focuslabs.wts.service.ITravelerService;
-import com.focuslabs.wts.vo.AccountVO;
-import com.focuslabs.wts.vo.CountryVO;
-import com.focuslabs.wts.vo.TravelerAccountVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

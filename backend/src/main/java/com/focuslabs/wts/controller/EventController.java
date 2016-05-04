@@ -1,10 +1,9 @@
-package com.focuslabs.web.controller;
+package com.focuslabs.wts.controller;
 
 import com.focuslabs.wts.entity.Account;
 import com.focuslabs.wts.entity.Traveler;
 import com.focuslabs.wts.service.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by melkamu on 3/30/2016.
