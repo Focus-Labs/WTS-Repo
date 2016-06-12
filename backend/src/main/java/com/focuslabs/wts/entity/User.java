@@ -36,7 +36,7 @@ public class User extends Entity{
     @DBRef
     private List<Story> stories = new ArrayList<Story>();
     @DBRef
-    private List<Availablity> trips = new ArrayList<Availablity>();
+    private List<Availability> trips = new ArrayList<Availability>();
 
     public User() {
     }
@@ -137,11 +137,11 @@ public class User extends Entity{
         this.stories = stories;
     }
 
-    public List<Availablity> getTrips() {
+    public List<Availability> getTrips() {
         return trips;
     }
 
-    public void setTrips(List<Availablity> trips) {
+    public void setTrips(List<Availability> trips) {
         this.trips = trips;
     }
 }

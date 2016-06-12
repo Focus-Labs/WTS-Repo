@@ -1,5 +1,9 @@
 package com.focuslabs.wts.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,15 +11,14 @@ import javax.persistence.*;
 /**
  * Created by aman on 3/23/16.
  */
-@Entity
+@Document
 public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long Id;
     private String postText;
 
-    @OneToMany
+    @DBRef
     private List<PostMedia> postMedias = new ArrayList<PostMedia>();
 
     public Post() {
@@ -27,11 +30,11 @@ public class Post implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long Id) {
+        this.Id = Id;
     }
 
     public String getPostText() {
@@ -53,18 +56,18 @@ public class Post implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (Id != null ? Id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the Id fields are not set
         if (!(object instanceof Post)) {
             return false;
         }
         Post other = (Post) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.Id == null && other.Id != null) || (this.Id != null && !this.Id.equals(other.Id))) {
             return false;
         }
         return true;
@@ -72,6 +75,6 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "com.focuslabs.com.focuslabs.wts.entity.Post[ id=" + id + " ]";
+        return "com.focuslabs.com.focuslabs.wts.entity.Post[ Id=" + Id + " ]";
     }
 }

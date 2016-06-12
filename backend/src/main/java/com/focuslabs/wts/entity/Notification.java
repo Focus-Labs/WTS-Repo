@@ -1,22 +1,19 @@
 package com.focuslabs.wts.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 /**
  * Created by aman on 3/23/16.
  */
-@Entity
+@Document
 public class Notification implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @OneToOne
-    private Account fromAccount;
-    @OneToOne
-    private Account toAccount;
+    private Long Id;
     private String notif_message;
     private Date date;
     private boolean flag_read;
@@ -24,36 +21,12 @@ public class Notification implements Serializable {
     public Notification() {
     }
 
-    public Notification(Account fromAccount, Account toAccount, String notif_message, Date date, boolean flag_read) {
-        this.fromAccount = fromAccount;
-        this.toAccount = toAccount;
-        this.notif_message = notif_message;
-        this.date = date;
-        this.flag_read = flag_read;
-    }
-
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Account getFromAccount() {
-        return fromAccount;
-    }
-
-    public void setFromAccount(Account fromAccount) {
-        this.fromAccount = fromAccount;
-    }
-
-    public Account getToAccount() {
-        return toAccount;
-    }
-
-    public void setToAccount(Account toAccount) {
-        this.toAccount = toAccount;
+        this.Id = id;
     }
 
     public String getNotif_message() {
@@ -83,18 +56,18 @@ public class Notification implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (Id != null ? Id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the Id fields are not set
         if (!(object instanceof Notification)) {
             return false;
         }
         Notification other = (Notification) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.Id == null && other.Id != null) || (this.Id != null && !this.Id.equals(other.Id))) {
             return false;
         }
         return true;
@@ -102,6 +75,6 @@ public class Notification implements Serializable {
 
     @Override
     public String toString() {
-        return "com.focuslabs.com.focuslabs.wts.entity.Notification[ id=" + id + " ]";
+        return "com.focuslabs.com.focuslabs.wts.entity.Notification[ Id=" + Id + " ]";
     }
 }

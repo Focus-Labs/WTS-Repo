@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by Sam on 6/12/2016.
  */
 @Document
-public class Availablity {
+public class Availability {
 
     @Id
     private String id;
@@ -20,5 +20,5 @@ public class Availablity {
     @DBRef
     private Location location;
 
-    public Availablity(){}
+    public Availability(){}
 }

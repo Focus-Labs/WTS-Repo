@@ -1,5 +1,9 @@
 package com.focuslabs.wts.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,63 +12,35 @@ import javax.persistence.*;
 /**
  * Created by aman on 3/23/16.
  */
-@Entity
+@Document
 public class Event implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String Id;
     private String title;
     private Date date;
     private String length;
     private String short_desc;
     private String long_desc;
     private String where_about;
-
-    @OneToOne
-    private City city;
     private String event_icon_Location;
     private String event_pic_Location;
 
-    @ManyToMany(mappedBy="eventsPartic")
-    private List<Traveler> travelers = new ArrayList<Traveler>();
-
-    @ManyToMany(mappedBy="eventsCollabo")
-    private List<Local> locals = new ArrayList<Local>();
-
-    @OneToMany
+    @DBRef
     private List<Post> posts = new ArrayList<Post>();
 
-    @OneToMany
+    @DBRef
     private List<EventMaterial> eventMaterials = new ArrayList<EventMaterial>();
 
     public Event() {
     }
 
-    public Event(String title, Date date, String length, String short_desc, String long_desc, String where_about, City city,
-                 String event_icon_Location, String event_pic_Location, List<Traveler> travelers, List<Local> locals,
-                 List<Post> posts, List<EventMaterial> eventMaterials) {
-        this.title = title;
-        this.date = date;
-        this.length = length;
-        this.short_desc = short_desc;
-        this.long_desc = long_desc;
-        this.where_about = where_about;
-        this.city = city;
-        this.event_icon_Location = event_icon_Location;
-        this.event_pic_Location = event_pic_Location;
-        this.travelers = travelers;
-        this.locals = locals;
-        this.posts = posts;
-        this.eventMaterials = eventMaterials;
+    public String getId() {
+        return Id;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(String id) {
+        Id = id;
     }
 
     public String getTitle() {
@@ -115,14 +91,6 @@ public class Event implements Serializable{
         this.where_about = where_about;
     }
 
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
     public String getEvent_icon_Location() {
         return event_icon_Location;
     }
@@ -139,21 +107,6 @@ public class Event implements Serializable{
         this.event_pic_Location = event_pic_Location;
     }
 
-    public List<Traveler> getTravelers() {
-        return travelers;
-    }
-
-    public void setTravelers(List<Traveler> travelers) {
-        this.travelers = travelers;
-    }
-
-    public List<Local> getLocals() {
-        return locals;
-    }
-
-    public void setLocals(List<Local> locals) {
-        this.locals = locals;
-    }
 
     public List<Post> getPosts() {
         return posts;
@@ -174,7 +127,7 @@ public class Event implements Serializable{
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (Id != null ? Id.hashCode() : 0);
         return hash;
     }
 
@@ -185,7 +138,7 @@ public class Event implements Serializable{
             return false;
         }
         Event other = (Event) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.Id == null && other.Id != null) || (this.Id != null && !this.Id.equals(other.Id))) {
             return false;
         }
         return true;
@@ -193,6 +146,6 @@ public class Event implements Serializable{
 
     @Override
     public String toString() {
-        return "com.focuslabs.com.focuslabs.wts.entity.Event[ id=" + id + " ]";
+        return "com.focuslabs.com.focuslabs.wts.entity.Event[ id=" + Id + " ]";
     }
 }
