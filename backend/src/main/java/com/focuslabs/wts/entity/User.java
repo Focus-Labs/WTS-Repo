@@ -41,6 +41,15 @@ public class User extends Entity{
     public User() {
     }
 
+    public User(String email, String password, String firstName, String lastName, String aboutMe, String education) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.aboutMe = aboutMe;
+        this.education = education;
+    }
+
     public String getId() {
         return id;
     }
