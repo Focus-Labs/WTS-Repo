@@ -1,6 +1,6 @@
 package com.focuslabs.wts.controller;
 
-import com.focuslabs.wts.service.IEventService;
+import com.focuslabs.wts.service.ILocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by baba on 6/13/2016.
  */
 @RestController
-@RequestMapping("/event")
-public class EventController {
+@RequestMapping("/location")
+public class LocationController {
 
     @Autowired
-    IEventService eventService;
+    ILocationService locationService;
 
-    @RequestMapping(value = "/numberOfEvents", method = RequestMethod.GET)
+    @RequestMapping(value = "/numberOfLocations", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> numberOfEvents() {
+    public ResponseEntity<?> numberOfLocations() {
         try {
-            return new ResponseEntity<Object>(eventService.getNumberOfEvents(), HttpStatus.valueOf(200));
+            return new ResponseEntity<Object>(locationService.getNumberOdLocations(), HttpStatus.valueOf(200));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));

@@ -1,31 +1,23 @@
 package com.focuslabs.wts.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import javax.persistence.*;
 /**
  * Created by aman on 3/23/16.
  */
-@Entity
+@Document
 public class EventMaterial implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String materialLocation;
     private String description;
     private String materialType;
 
-    @OneToOne
-    private Traveler traveler;
-
     public EventMaterial() {
-    }
-
-    public EventMaterial(String materialLocation, String description, String materialType, Traveler traveler) {
-        this.materialLocation = materialLocation;
-        this.description = description;
-        this.materialType = materialType;
-        this.traveler = traveler;
     }
 
     public Long getId() {
@@ -59,15 +51,7 @@ public class EventMaterial implements Serializable {
     public void setMaterialType(String materialType) {
         this.materialType = materialType;
     }
-
-    public Traveler getTraveler() {
-        return traveler;
-    }
-
-    public void setTraveler(Traveler traveler) {
-        this.traveler = traveler;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
