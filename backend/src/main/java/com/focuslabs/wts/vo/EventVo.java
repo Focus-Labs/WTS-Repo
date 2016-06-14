@@ -7,20 +7,20 @@ import java.io.Serializable;
  */
 public class EventVo implements Serializable {
 
-    private int numberOfEvents;
+    private long numberOfEvents;
 
     public EventVo() {
     }
 
-    public EventVo(int numberOfEvents) {
+    public EventVo(long numberOfEvents) {
         this.numberOfEvents = numberOfEvents;
     }
 
-    public int getNumberOfEvents() {
+    public long getNumberOfEvents() {
         return numberOfEvents;
     }
 
-    public void setNumberOfEvents(int numberOfEvents) {
+    public void setNumberOfEvents(long numberOfEvents) {
         this.numberOfEvents = numberOfEvents;
     }
 }

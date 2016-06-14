@@ -7,20 +7,20 @@ import java.io.Serializable;
  */
 public class OrganizationVo implements Serializable {
 
-    private int numberOfOrganizations;
+    private long numberOfOrganizations;
 
     public OrganizationVo() {
     }
 
-    public OrganizationVo(int numberOfOrganizations) {
+    public OrganizationVo(long numberOfOrganizations) {
         this.numberOfOrganizations = numberOfOrganizations;
     }
 
-    public int getNumberOfOrganizations() {
+    public long getNumberOfOrganizations() {
         return numberOfOrganizations;
     }
 
-    public void setNumberOfOrganizations(int numberOfOrganizations) {
+    public void setNumberOfOrganizations(long numberOfOrganizations) {
         this.numberOfOrganizations = numberOfOrganizations;
     }
 }

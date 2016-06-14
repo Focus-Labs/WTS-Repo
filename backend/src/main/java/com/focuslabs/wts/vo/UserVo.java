@@ -7,20 +7,20 @@ import java.io.Serializable;
  */
 public class UserVo implements Serializable{
 
-    private int numberOfUsers;
+    private long numberOfUsers;
 
     public UserVo() {
     }
 
-    public UserVo(int numberOfUsers) {
+    public UserVo(long numberOfUsers) {
         this.numberOfUsers = numberOfUsers;
     }
 
-    public int getNumberOfUsers() {
+    public long getNumberOfUsers() {
         return numberOfUsers;
     }
 
-    public void setNumberOfUsers(int numberOfUsers) {
+    public void setNumberOfUsers(long numberOfUsers) {
         this.numberOfUsers = numberOfUsers;
     }
 }
