@@ -44,8 +44,8 @@ public class EventControllerTest {
     @Before
     public void setup() throws Exception {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
-
-//        repository.save(new Event());
+        repository.deleteAll();
+        repository.save(new Event());
 
     }
 

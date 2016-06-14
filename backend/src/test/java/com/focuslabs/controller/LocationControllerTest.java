@@ -44,8 +44,8 @@ public class LocationControllerTest {
     @Before
     public void setup() throws Exception {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
-
-//        repository.save(new Location());
+        repository.deleteAll();
+        repository.save(new Location());
 
     }
 
@@ -54,6 +54,6 @@ public class LocationControllerTest {
         mockMvc.perform(get("/location/numberOfLocations"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$.numberOfLocation",is(3)));
+                .andExpect(jsonPath("$.numberOfLocation",is(1)));
     }
 }

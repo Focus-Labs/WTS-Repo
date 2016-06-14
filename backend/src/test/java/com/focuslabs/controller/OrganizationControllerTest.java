@@ -44,7 +44,7 @@ public class OrganizationControllerTest {
     @Before
     public void setup() throws Exception {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
-
+        repository.deleteAll();
         repository.save(new Organization());
 
     }
