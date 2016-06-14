@@ -19,6 +19,6 @@ public class EventServiceImpl implements IEventService {
 
     @Override
     public EventVo getNumberOfEvents() {
-        return new EventVo(eventRepository.findAll().size());
+        return new EventVo(eventRepository.count());
     }
 }

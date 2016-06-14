@@ -19,6 +19,6 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserVo getNumberOfUsers() {
-        return new UserVo(userRepository.findAll().size());
+        return new UserVo(userRepository.count());
     }
 }

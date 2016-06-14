@@ -19,6 +19,6 @@ public class LocationServiceImpl implements ILocationService {
 
     @Override
     public LocationVo getNumberOdLocations() {
-        return new LocationVo(locationRepository.findAll().size());
+        return new LocationVo(locationRepository.count());
     }
 }

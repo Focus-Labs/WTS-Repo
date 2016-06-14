@@ -19,6 +19,6 @@ public class OrganizationServiceImpl implements IOrganizationService {
 
     @Override
     public OrganizationVo getNumberOfOrganizations() {
-        return new OrganizationVo(organizationRepository.findAll().size());
+        return new OrganizationVo(organizationRepository.count());
     }
 }
