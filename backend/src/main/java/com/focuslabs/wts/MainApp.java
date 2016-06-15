@@ -75,9 +75,7 @@ public class MainApp {
                 .securitySchemes(newArrayList(apiKey()))
                 .securityContexts(newArrayList(securityContext()))
                 .enableUrlTemplating(true)
-                .tags(new Tag("Pet Service", "All apis relating to pets"))
-//                .additionalModels(typeResolver.resolve(AdditionalModel.class))
-                ;
+                .tags(new Tag("Pet Service", "All apis relating to pets"));
     }
 
     private ApiKey apiKey() {
