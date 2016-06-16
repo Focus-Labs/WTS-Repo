@@ -5,20 +5,31 @@ package com.focuslabs.wts.vo;
  */
 public class LocationVo {
 
-    private long numberOfLocations;
+    private String id;
+    private String name;
 
     public LocationVo() {
     }
 
-    public LocationVo(long numberOfLocations) {
-        this.numberOfLocations = numberOfLocations;
+    public LocationVo(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    public long getNumberOfLocation() {
-        return numberOfLocations;
+    public String getId() {
+        return id;
     }
 
-    public void setNumberOfLocation(long numberOfLocations) {
-        this.numberOfLocations = numberOfLocations;
+    public void setId(String id) {
+        this.id = id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

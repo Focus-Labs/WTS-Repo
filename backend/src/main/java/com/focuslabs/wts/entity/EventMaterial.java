@@ -10,9 +10,9 @@ import javax.persistence.*;
  */
 @Document
 public class EventMaterial implements Serializable {
-    private static final long serialVersionUID = 1L;
+
     @Id
-    private Long id;
+    private String Id;
     private String materialLocation;
     private String description;
     private String materialType;
@@ -20,12 +20,12 @@ public class EventMaterial implements Serializable {
     public EventMaterial() {
     }
 
-    public Long getId() {
-        return id;
+    public String getId() {
+        return Id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(String Id) {
+        this.Id = Id;
     }
 
     public String getMaterialLocation() {
@@ -55,18 +55,18 @@ public class EventMaterial implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (Id != null ? Id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the Id fields are not set
         if (!(object instanceof EventMaterial)) {
             return false;
         }
         EventMaterial other = (EventMaterial) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.Id == null && other.Id != null) || (this.Id != null && !this.Id.equals(other.Id))) {
             return false;
         }
         return true;
@@ -74,6 +74,6 @@ public class EventMaterial implements Serializable {
 
     @Override
     public String toString() {
-        return "com.focuslabs.com.focuslabs.wts.entity.EventMaterial[ id=" + id + " ]";
+        return "com.focuslabs.com.focuslabs.wts.entity.EventMaterial[ Id=" + Id + " ]";
     }
 }
