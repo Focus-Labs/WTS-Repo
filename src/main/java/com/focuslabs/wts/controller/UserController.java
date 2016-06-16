@@ -19,6 +19,7 @@ import java.util.List;
 /**
  * Created by baba on 4/3/2016.
  */
+@CrossOrigin
 @Controller
 @RequestMapping("/users")
 public class UserController {
