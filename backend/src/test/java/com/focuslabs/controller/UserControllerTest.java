@@ -44,12 +44,13 @@ public class UserControllerTest {
 
     @Autowired
     UserRepository repository;
+    private User user;
 
     @Before
     public void setup() throws Exception {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
         repository.deleteAll();
-        repository.save(new User());
+        user = repository.save(new User("email@gmail.com","password","firstName","lastName","about Me","education level"));
 
     }
 
@@ -59,6 +60,33 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$.numberOfUsers",is(1)));
+    }
+
+    @Test
+    public void getAllUsers() throws Exception {
+        mockMvc.perform(get("/users/allUsers"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$[0].email",is("email@gmail.com")))
+                .andExpect(jsonPath("$[0].password", is("password")))
+                .andExpect(jsonPath("$[0].firstName", is("firstName")))
+                .andExpect(jsonPath("$[0].lastName", is("lastName")))
+                .andExpect(jsonPath("$[0].aboutMe", is("about Me")))
+                .andExpect(jsonPath("$[0].education", is("education level")));
+    }
+
+    @Test
+    public void getUser() throws Exception {
+        mockMvc.perform(get("/users/user?userId=" + user.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.id", is(user.getId())))
+                .andExpect(jsonPath("$.email", is("email@gmail.com")))
+                .andExpect(jsonPath("$.password", is("password")))
+                .andExpect(jsonPath("$.firstName", is("firstName")))
+                .andExpect(jsonPath("$.lastName", is("lastName")))
+                .andExpect(jsonPath("$.aboutMe", is("about Me")))
+                .andExpect(jsonPath("$.education", is("education level")));
     }
 
 }
