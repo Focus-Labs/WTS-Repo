@@ -1,7 +1,10 @@
 package com.focuslabs.wts;
 
 import com.fasterxml.classmate.TypeResolver;
+import com.focuslabs.wts.entity.User;
+import com.focuslabs.wts.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -40,14 +43,24 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
 @EnableAutoConfiguration
 @SpringBootApplication
 @EnableSwagger2
-public class MainApp {
+public class MainApp implements CommandLineRunner {
 
     @Autowired
     private TypeResolver typeResolver;
+    @Autowired
+    private UserRepository userRepository;
 
     public static void main(String[] args) {
         // TODO code application logic here
         ApplicationContext context = SpringApplication.run(MainApp.class, args);
+    }
+
+    @Override
+    public void run(String... arg0) throws Exception {
+        User user = userRepository.findByEmail("test");
+        if (user == null) {
+            user = userRepository.save(new User("test", "test", "", "", "", ""));
+        }
     }
 
     @Bean
