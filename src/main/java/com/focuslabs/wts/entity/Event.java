@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Event implements Serializable{
 
     @Id
-    private String Id;
+    private String id;
     private String title;
     private Date date;
     private String length;
@@ -35,12 +35,23 @@ public class Event implements Serializable{
     public Event() {
     }
 
+    public Event(String title, Date date, String length, String short_desc, String long_desc, String where_about, String event_icon_Location, String event_pic_Location) {
+        this.title = title;
+        this.date = date;
+        this.length = length;
+        this.short_desc = short_desc;
+        this.long_desc = long_desc;
+        this.where_about = where_about;
+        this.event_icon_Location = event_icon_Location;
+        this.event_pic_Location = event_pic_Location;
+    }
+
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        id = id;
     }
 
     public String getTitle() {
@@ -127,7 +138,7 @@ public class Event implements Serializable{
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (Id != null ? Id.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -138,7 +149,7 @@ public class Event implements Serializable{
             return false;
         }
         Event other = (Event) object;
-        if ((this.Id == null && other.Id != null) || (this.Id != null && !this.Id.equals(other.Id))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -146,6 +157,6 @@ public class Event implements Serializable{
 
     @Override
     public String toString() {
-        return "com.focuslabs.com.focuslabs.wts.entity.Event[ id=" + Id + " ]";
+        return "com.focuslabs.com.focuslabs.wts.entity.Event[ id=" + id + " ]";
     }
 }

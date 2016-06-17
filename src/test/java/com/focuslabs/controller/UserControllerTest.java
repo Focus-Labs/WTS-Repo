@@ -1,15 +1,16 @@
 package com.focuslabs.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.focuslabs.wts.MainApp;
 import com.focuslabs.wts.entity.User;
 import com.focuslabs.wts.repository.UserRepository;
+import com.focuslabs.wts.vo.UserVo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -19,6 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.nio.charset.Charset;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -49,8 +51,8 @@ public class UserControllerTest {
     @Before
     public void setup() throws Exception {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
-        repository.deleteAll();
-        user = repository.save(new User("email@gmail.com","password","firstName","lastName","about Me","education level"));
+            repository.deleteAll();
+            user = repository.save(new User("email@gmail.com","password","firstName","lastName","about Me","education level"));
 
     }
 
@@ -59,7 +61,7 @@ public class UserControllerTest {
         mockMvc.perform(get("/users/numberOfUsers"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$.numberOfUsers",is(1)));
+                .andExpect(jsonPath("$.numberOfUsers",is("1")));
     }
 
     @Test
@@ -85,6 +87,24 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.password", is("password")))
                 .andExpect(jsonPath("$.firstName", is("firstName")))
                 .andExpect(jsonPath("$.lastName", is("lastName")))
+                .andExpect(jsonPath("$.aboutMe", is("about Me")))
+                .andExpect(jsonPath("$.education", is("education level")));
+    }
+
+    @Test
+    public void updateUser() throws Exception {
+        UserVo u = new UserVo(user.getId(),"baba@gmail.com","","Nebyu","dawit","","");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(u);
+        System.out.println(json);
+        mockMvc.perform(put("/users/update").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.id", is(u.getId())))
+                .andExpect(jsonPath("$.email", is("baba@gmail.com")))
+                .andExpect(jsonPath("$.password", is("password")))
+                .andExpect(jsonPath("$.firstName", is("Nebyu")))
+                .andExpect(jsonPath("$.lastName", is("dawit")))
                 .andExpect(jsonPath("$.aboutMe", is("about Me")))
                 .andExpect(jsonPath("$.education", is("education level")));
     }

@@ -20,13 +20,13 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/event")
+@RequestMapping("/events")
 public class EventController {
 
     @Autowired
     IEventService eventService;
 
-    @RequestMapping(value = "/numberOfEvents", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/numberOfEvents", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     @ApiOperation(value = "number of events", notes = "return number of events")
     @ApiResponses( value = {
@@ -37,8 +37,7 @@ public class EventController {
     })
     public ResponseEntity<?> numberOfEvents() {
         try {
-            Long numberOfEvents = eventService.getNumberOfEvents();
-            return new ResponseEntity<Object>(numberOfEvents, HttpStatus.valueOf(200));
+            return new ResponseEntity<Object>("{\"numberOfEvents\" : \"" + eventService.getNumberOfEvents() + "\"}", HttpStatus.valueOf(200));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));

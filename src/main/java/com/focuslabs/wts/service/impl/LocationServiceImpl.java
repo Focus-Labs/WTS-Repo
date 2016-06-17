@@ -39,7 +39,7 @@ public class LocationServiceImpl implements ILocationService {
     public Location updateLocation(LocationVo l) {
         Location location = locationRepository.findOne(l.getId());
         if(location != null) {
-            location.setName(l.getName());
+            location.setName((l.getName() != null && !l.getName().isEmpty()) ? l.getName() : location.getName());
             return locationRepository.save(location);
         }
         return null;

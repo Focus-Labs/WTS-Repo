@@ -1,8 +1,10 @@
 package com.focuslabs.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.focuslabs.wts.MainApp;
 import com.focuslabs.wts.entity.Location;
 import com.focuslabs.wts.repository.LocationRepository;
+import com.focuslabs.wts.vo.LocationVo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +20,7 @@ import java.nio.charset.Charset;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,21 +42,50 @@ public class LocationControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
     @Autowired
-    LocationRepository repository;
+    LocationRepository locationRepository;
+    private Location location;
 
     @Before
     public void setup() throws Exception {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
-        repository.deleteAll();
-        repository.save(new Location());
+        locationRepository.deleteAll();
+        location = locationRepository.save(new Location("Addis Ababa"));
 
     }
 
     @Test
     public void getNumberOfLocations() throws Exception {
-        mockMvc.perform(get("/location/numberOfLocations"))
+        mockMvc.perform(get("/locations/numberOfLocations"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$.numberOfLocation",is(1)));
+                .andExpect(jsonPath("$.numberOfLocations",is("1")));
     }
+
+    @Test
+    public void getAllLocations() throws Exception {
+        mockMvc.perform(get("/locations/allLocations"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$[0].name",is(location.getName())));
+    }
+
+    @Test
+    public void getLocation() throws Exception {
+        mockMvc.perform(get("/locations/location?locationId=" + location.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.name",is(location.getName())));
+    }
+
+    @Test
+    public void updateLocation() throws Exception {
+        LocationVo l = new LocationVo(location.getId(),"Adama");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(l);
+        mockMvc.perform(put("/locations/update").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.name",is(l.getName())));
+    }
+
 }

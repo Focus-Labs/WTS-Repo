@@ -44,8 +44,8 @@ public class OrganizationServiceImpl implements IOrganizationService {
     public Organization updateOrganization(OrganizationVo o) {
         Organization organization = organizationRepository.findOne(o.getId());
         if(organization != null) {
-            organization.setHomepage(o.getHomePage());
-            organization.setName(o.getName());
+            organization.setHomepage((o.getHomePage() != null && !o.getHomePage().isEmpty()) ? o.getHomePage() : organization.getHomepage());
+            organization.setName((o.getName() != null && !o.getName().isEmpty()) ? o.getName() : organization.getName());
             return organizationRepository.save(organization);
         }
         return null;

@@ -22,13 +22,13 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/location")
+@RequestMapping("/locations")
 public class LocationController {
 
     @Autowired
     ILocationService locationService;
 
-    @RequestMapping(value = "/numberOfLocations", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/numberOfLocations", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     @ApiOperation(value = "number of locations", notes = "return number of locations")
     @ApiResponses( value = {
@@ -39,8 +39,7 @@ public class LocationController {
     })
     public ResponseEntity<?> numberOfLocations() {
         try {
-            Long numberOfLocations = locationService.getNumberOdLocations();
-            return new ResponseEntity<Object>(numberOfLocations, HttpStatus.valueOf(200));
+            return new ResponseEntity<Object>("{\"numberOfLocations\" : \"" + locationService.getNumberOdLocations() + "\"}", HttpStatus.valueOf(200));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));

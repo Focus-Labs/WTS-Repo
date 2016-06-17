@@ -24,13 +24,13 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/organization")
+@RequestMapping("/organizations")
 public class OrganizationController {
 
     @Autowired
     IOrganizationService organizationService;
 
-    @RequestMapping(value = "/numberOfOrganizations",method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/numberOfOrganizations",method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     @ApiOperation(value = "number of organizations", notes = "return number of organizations")
     @ApiResponses( value = {
@@ -41,7 +41,7 @@ public class OrganizationController {
     })
     public ResponseEntity<?> numberOfOrganiztions() {
         try {
-            return new ResponseEntity<Object>(organizationService.getNumberOfOrganizations(), HttpStatus.valueOf(200));
+            return new ResponseEntity<Object>("{\"numberOfOrganizations\" : \"" + organizationService.getNumberOfOrganizations() + "\"}", HttpStatus.valueOf(200));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));

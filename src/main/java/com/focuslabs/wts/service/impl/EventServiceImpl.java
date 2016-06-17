@@ -39,14 +39,14 @@ public class EventServiceImpl implements IEventService {
     public Event updateEvent(EventVo e) {
         Event event = eventRepository.findOne(e.getId());
         if(event != null) {
-            event.setDate(e.getDate());
-            event.setLength(e.getLength());
-            event.setEvent_icon_Location(e.getEventIconLocation());
-            event.setEvent_pic_Location(e.getEventPictureLocation());
-            event.setLong_desc(e.getLongDescription());
-            event.setShort_desc(e.getShortDescription());
-            event.setTitle(e.getTitle());
-            event.setWhere_about(e.getWhereAbout());
+            event.setDate((e.getDate() != null) ? e.getDate() : event.getDate());
+            event.setLength((e.getLength() != null && !e.getLength().isEmpty()) ? e.getLength() : event.getLength());
+            event.setEvent_icon_Location((e.getEventIconLocation() != null && !e.getEventIconLocation().isEmpty()) ? e.getEventIconLocation() : event.getEvent_icon_Location());
+            event.setEvent_pic_Location((e.getEventPictureLocation() != null && !e.getEventPictureLocation().isEmpty()) ? e.getEventPictureLocation() : event.getEvent_pic_Location());
+            event.setLong_desc((e.getLongDescription() != null && !e.getLongDescription().isEmpty()) ? e.getLongDescription() : event.getLong_desc());
+            event.setShort_desc((e.getShortDescription() != null && !e.getShortDescription().isEmpty()) ? e.getShortDescription() : event.getShort_desc());
+            event.setTitle((e.getTitle() != null && !e.getTitle().isEmpty()) ? e.getTitle() : event.getTitle());
+            event.setWhere_about((e.getWhereAbout() != null && !e.getWhereAbout().isEmpty()) ? e.getWhereAbout() : event.getWhere_about());
             return eventRepository.save(event);
         }
         return null;
