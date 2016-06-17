@@ -13,5 +13,6 @@ public interface ILocationService {
     Long getNumberOdLocations();
     List<Location> getAllLocations();
     Location getLocation(String locationId);
+    Location updateLocation(LocationVo l);
 
 }

@@ -1,6 +1,7 @@
 package com.focuslabs.wts.service;
 
 import com.focuslabs.wts.entity.Organization;
+import com.focuslabs.wts.vo.OrganizationVo;
 
 import java.util.List;
 
@@ -12,5 +13,6 @@ public interface IOrganizationService {
     Long getNumberOfOrganizations();
     List<Organization> getAllOrganizations();
     Organization getOrganization(String organizationId);
+    Organization updateOrganization(OrganizationVo o);
 
 }

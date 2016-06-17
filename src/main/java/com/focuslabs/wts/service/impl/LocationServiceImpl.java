@@ -34,4 +34,14 @@ public class LocationServiceImpl implements ILocationService {
     public Location getLocation(String locationId) {
         return locationRepository.findOne(locationId);
     }
+
+    @Override
+    public Location updateLocation(LocationVo l) {
+        Location location = locationRepository.findOne(l.getId());
+        if(location != null) {
+            location.setName(l.getName());
+            return locationRepository.save(location);
+        }
+        return null;
+    }
 }

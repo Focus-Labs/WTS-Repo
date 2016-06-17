@@ -1,5 +1,6 @@
 package com.focuslabs.wts.service.impl;
 
+import com.focuslabs.wts.entity.Location;
 import com.focuslabs.wts.entity.Organization;
 import com.focuslabs.wts.entity.User;
 import com.focuslabs.wts.repository.OrganizationRepository;
@@ -37,6 +38,17 @@ public class OrganizationServiceImpl implements IOrganizationService {
     @Override
     public Organization getOrganization(String organizationId) {
         return organizationRepository.findOne(organizationId);
+    }
+
+    @Override
+    public Organization updateOrganization(OrganizationVo o) {
+        Organization organization = organizationRepository.findOne(o.getId());
+        if(organization != null) {
+            organization.setHomepage(o.getHomePage());
+            organization.setName(o.getName());
+            return organizationRepository.save(organization);
+        }
+        return null;
     }
 
 }
