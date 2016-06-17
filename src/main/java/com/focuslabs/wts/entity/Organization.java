@@ -38,6 +38,13 @@ public class Organization extends Entity{
 
     public Organization(){}
 
+    public Organization(String name, String homepage,User admin,Location location) {
+        this.name = name;
+        this.homepage = homepage;
+        this.admin = admin;
+        this.address = location;
+    }
+
     public String getId() {
         return id;
     }
