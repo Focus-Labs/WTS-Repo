@@ -55,7 +55,7 @@ public class LocationController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")
     })
-    public ResponseEntity<?> getAllEvents() {
+    public ResponseEntity<?> getAllLocations() {
         try {
             List<LocationVo> locations = new ArrayList<>();
             locationService.getAllLocations().stream().forEach(l -> {
@@ -78,7 +78,7 @@ public class LocationController {
             @ApiResponse(code = 500, message = "Failure")
     })
     @ApiImplicitParam(name = "locationId", required = true, dataType = "string", paramType = "query", value = "unique location Id")
-    public ResponseEntity<?> getUser(@RequestParam(value = "locationId", required = true) String locationId) {
+    public ResponseEntity<?> getLocation(@RequestParam(value = "locationId", required = true) String locationId) {
         if(locationId != null && !locationId.isEmpty()) {
             try {
                 Location l = locationService.getLocation(locationId);
@@ -91,6 +91,30 @@ public class LocationController {
         }
         return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(500));
     }
+
+    @RequestMapping(value = "/update",method = RequestMethod.PUT, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    @ApiOperation(value = "update location", notes = "return the modified location")
+    @ApiResponses( value = {
+            @ApiResponse(code = 200, message = "Success", response = LocationVo.class),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")
+    })
+    public ResponseEntity<?> updateLocation(@RequestBody LocationVo locationVo) {
+        if(locationVo != null) {
+            try {
+                Location l = locationService.updateLocation(locationVo);
+                LocationVo location = new LocationVo(l.getId(),l.getName());
+                return new ResponseEntity<Object>(location, HttpStatus.valueOf(200));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));
+            }
+        }
+        return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(500));
+    }
+
 
 
 }

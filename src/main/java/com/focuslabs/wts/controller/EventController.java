@@ -3,7 +3,6 @@ package com.focuslabs.wts.controller;
 import com.focuslabs.wts.entity.Event;
 import com.focuslabs.wts.service.IEventService;
 import com.focuslabs.wts.vo.EventVo;
-import com.focuslabs.wts.vo.UserVo;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -81,6 +80,29 @@ public class EventController {
         if(eventId != null && !eventId.isEmpty()) {
             try {
                 Event e = eventService.getEvent(eventId);
+                EventVo event = new EventVo(e.getId(),e.getTitle(),e.getDate(),e.getLength(),e.getShort_desc(),e.getLong_desc(),e.getWhere_about(),e.getEvent_icon_Location(),e.getEvent_pic_Location());
+                return new ResponseEntity<Object>(event, HttpStatus.valueOf(200));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));
+            }
+        }
+        return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(500));
+    }
+
+    @RequestMapping(value = "/update",method = RequestMethod.PUT, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    @ApiOperation(value = "update event", notes = "return the modified event")
+    @ApiResponses( value = {
+            @ApiResponse(code = 200, message = "Success", response = EventVo.class),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")
+    })
+    public ResponseEntity<?> updateEvent(@RequestBody EventVo eventVo) {
+        if(eventVo != null) {
+            try {
+                Event e = eventService.updateEvent(eventVo);
                 EventVo event = new EventVo(e.getId(),e.getTitle(),e.getDate(),e.getLength(),e.getShort_desc(),e.getLong_desc(),e.getWhere_about(),e.getEvent_icon_Location(),e.getEvent_pic_Location());
                 return new ResponseEntity<Object>(event, HttpStatus.valueOf(200));
             } catch (Exception e) {

@@ -9,6 +9,7 @@ import com.focuslabs.wts.vo.UserVo;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -100,7 +101,7 @@ public class UserController {
         return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(500));
     }
 
-    @RequestMapping(value = "/update",method = RequestMethod.PUT, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/update",method = RequestMethod.PUT, produces = "application/json;charset=UTF-8", consumes = MediaType.ALL_VALUE)
     @ResponseBody
     @ApiOperation(value = "update user", notes = "return the modified user")
     @ApiResponses( value = {
@@ -109,12 +110,12 @@ public class UserController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")
     })
-//    @ApiImplicitParam(name = "userId", required = true, dataType = "string", paramType = "query", value = "unique user Id")
     public ResponseEntity<?> updateUser(@RequestBody UserVo user) {
         if(user != null) {
             try {
-                User newUser = userService.updateUser(user);
-                return new ResponseEntity<Object>(newUser, HttpStatus.valueOf(200));
+                User u = userService.updateUser(user);
+                UserVo user1 = new UserVo(u.getId(),u.getEmail(),u.getPassword(),u.getFirstName(),u.getLastName(),u.getAboutMe(),u.getEducation());
+                return new ResponseEntity<Object>(user1,HttpStatus.valueOf(200));
             } catch (Exception e) {
                 e.printStackTrace();
                 return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));
