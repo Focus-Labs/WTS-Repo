@@ -28,7 +28,7 @@ public class UserController {
     IUserService userService;
 
 
-    @RequestMapping(value = "/numberOfUsers", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/numberOfUsers", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     @ApiOperation(value = "number of users", notes = "return number of users")
     @ApiResponses( value = {
@@ -39,7 +39,7 @@ public class UserController {
     })
     public ResponseEntity<?> numberOfUsers() {
         try {
-            return new ResponseEntity<Object>(userService.getNumberOfUsers(), HttpStatus.valueOf(200));
+            return new ResponseEntity<Object>("{\"numberOfUsers\" : \"" + userService.getNumberOfUsers() + "\"}", HttpStatus.valueOf(200));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));
