@@ -42,12 +42,12 @@ public class UserServiceImpl implements IUserService {
     public User updateUser(UserVo user) {
         User oldUser = userRepository.findOne(user.getId());
         if(oldUser != null) {
-            oldUser.setEmail(user.getEmail());
-            oldUser.setPassword(user.getPassword());
-            oldUser.setFirstName(user.getFirstName());
-            oldUser.setLastName(user.getLastName());
-            oldUser.setAboutMe(user.getAboutMe());
-            oldUser.setEducation(user.getEducation());
+            oldUser.setEmail((user.getEmail() != null && !user.getEmail().isEmpty()) ? user.getEmail() : oldUser.getEmail());
+            oldUser.setPassword((user.getPassword() != null && !user.getPassword().isEmpty()) ? user.getPassword() : oldUser.getPassword());
+            oldUser.setFirstName((user.getFirstName() != null && !user.getFirstName().isEmpty()) ? user.getFirstName() : oldUser.getFirstName());
+            oldUser.setLastName((user.getLastName() != null && !user.getLastName().isEmpty()) ? user.getLastName() : oldUser.getLastName());
+            oldUser.setAboutMe((user.getAboutMe() != null && !user.getAboutMe().isEmpty()) ? user.getAboutMe() : oldUser.getAboutMe());
+            oldUser.setEducation((user.getEducation() != null && !user.getEducation().isEmpty()) ? user.getEducation() : oldUser.getEducation());
             return userRepository.save(oldUser);
         }
         return null;
