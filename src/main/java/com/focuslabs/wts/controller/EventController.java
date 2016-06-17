@@ -18,6 +18,7 @@ import java.util.List;
 /**
  * Created by baba on 6/13/2016.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/event")
 public class EventController {
