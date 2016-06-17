@@ -1,18 +1,16 @@
 package com.focuslabs.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.focuslabs.wts.MainApp;
 import com.focuslabs.wts.entity.User;
 import com.focuslabs.wts.repository.UserRepository;
 import com.focuslabs.wts.vo.UserVo;
-import jdk.nashorn.internal.parser.JSONParser;
-import net.minidev.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -63,7 +61,7 @@ public class UserControllerTest {
         mockMvc.perform(get("/users/numberOfUsers"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$.numberOfUsers",is(1)));
+                .andExpect(jsonPath("$.numberOfUsers",is("1")));
     }
 
     @Test
@@ -95,10 +93,11 @@ public class UserControllerTest {
 
     @Test
     public void updateUser() throws Exception {
-        UserVo u = new UserVo(user.getId(),"baba@gmail.com","password","Nebyu","","about Me","education level");
-//        JSONParser jsonParser = new JSONParser();
-//        JSONObject jsonObject = (JSONObject).parse(u);
-        mockMvc.perform(put("/users/update",u))
+        UserVo u = new UserVo(user.getId(),"baba@gmail.com","","Nebyu","dawit","","");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(u);
+        System.out.println(json);
+        mockMvc.perform(put("/users/update").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$.id", is(u.getId())))
