@@ -21,6 +21,7 @@ import java.util.Date;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -111,6 +112,25 @@ public class EventControllerTest {
                 .andExpect(jsonPath("$.whereAbout",is("where About")))
                 .andExpect(jsonPath("$.eventIconLocation",is("event icon location")))
                 .andExpect(jsonPath("$.eventPictureLocation", is(event.getEvent_pic_Location())));
+    }
+
+    @Test
+    public void createEvent() throws Exception {
+        eventRepository.deleteAll();
+        EventVo e = new EventVo("title",new Date(),"2 hours","short description","long description","where about","icon location","pic location");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(e);
+        mockMvc.perform(post("/events/create").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.title",is("title")))
+//                .andExpect(jsonPath("$.date",is(event.getDate())))
+                .andExpect(jsonPath("$.length", is("2 hours")))
+                .andExpect(jsonPath("$.shortDescription",is("short description")))
+                .andExpect(jsonPath("$.longDescription",is("long description")))
+                .andExpect(jsonPath("$.whereAbout",is("where about")))
+                .andExpect(jsonPath("$.eventIconLocation",is("icon location")))
+                .andExpect(jsonPath("$.eventPictureLocation", is("pic location")));
     }
 
 
