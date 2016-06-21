@@ -11,6 +11,10 @@ public class LocationVo {
     public LocationVo() {
     }
 
+    public LocationVo(String name) {
+        this.name = name;
+    }
+
     public LocationVo(String id, String name) {
         this.id = id;
         this.name = name;

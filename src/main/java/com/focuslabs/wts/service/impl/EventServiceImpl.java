@@ -36,7 +36,12 @@ public class EventServiceImpl implements IEventService {
     }
 
     @Override
-    public Event updateEvent(EventVo e) {
+    public Event create(EventVo e) {
+        return eventRepository.save(new Event(e.getTitle(),e.getDate(),e.getLength(),e.getShortDescription(),e.getLongDescription(),e.getWhereAbout(),e.getEventIconLocation(),e.getEventPictureLocation()));
+    }
+
+    @Override
+    public Event update(EventVo e) {
         Event event = eventRepository.findOne(e.getId());
         if(event != null) {
             event.setDate((e.getDate() != null) ? e.getDate() : event.getDate());

@@ -20,6 +20,7 @@ import java.nio.charset.Charset;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -86,6 +87,18 @@ public class LocationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$.name",is(l.getName())));
+    }
+
+    @Test
+    public void createLocation() throws Exception {
+        locationRepository.deleteAll();
+        LocationVo l = new LocationVo("location");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(l);
+        mockMvc.perform(post("/locations/create").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.name",is("location")));
     }
 
 }

@@ -8,6 +8,7 @@ import com.focuslabs.wts.entity.User;
 import com.focuslabs.wts.repository.LocationRepository;
 import com.focuslabs.wts.repository.OrganizationRepository;
 import com.focuslabs.wts.repository.UserRepository;
+import com.focuslabs.wts.vo.LocationVo;
 import com.focuslabs.wts.vo.OrganizationVo;
 import com.focuslabs.wts.vo.UserVo;
 import org.junit.Before;
@@ -25,6 +26,7 @@ import java.nio.charset.Charset;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -106,6 +108,32 @@ public class OrganizationControllerTest {
                 .andExpect(jsonPath("$.id", is(organization.getId())))
                 .andExpect(jsonPath("$.name",is("Xhub")))
                 .andExpect(jsonPath("$.homePage", is("homepage.com")));
+    }
+
+    @Test
+    public void createOrganization() throws Exception {
+        organizationRepository.deleteAll();
+        userRepository.deleteAll();
+        locationRepository.deleteAll();
+        location = locationRepository.save(new Location("Addis Ababa"));
+        admin = userRepository.save(new User("email@gmail.com","password","firstName","lastName","about Me","education level"));
+        OrganizationVo o = new OrganizationVo("organization","homepage.com",new LocationVo(location.getId(),location.getName()),new UserVo(admin.getId(),"","","","","",""));
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(o);
+        mockMvc.perform(post("/organizations/create").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.name", is("organization")))
+                .andExpect(jsonPath("$.homePage", is("homepage.com")))
+                .andExpect(jsonPath("$.admin.id", is(admin.getId())))
+                .andExpect(jsonPath("$.admin.email", is("email@gmail.com")))
+                .andExpect(jsonPath("$.admin.password", is("password")))
+                .andExpect(jsonPath("$.admin.firstName", is("firstName")))
+                .andExpect(jsonPath("$.admin.lastName", is("lastName")))
+                .andExpect(jsonPath("$.admin.aboutMe", is("about Me")))
+                .andExpect(jsonPath("$.admin.education", is("education level")))
+                .andExpect(jsonPath("$.location.id",is(location.getId())))
+                .andExpect(jsonPath("$.location.name", is("Addis Ababa")));
     }
 
 

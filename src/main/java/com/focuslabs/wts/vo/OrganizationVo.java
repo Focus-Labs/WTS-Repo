@@ -21,6 +21,13 @@ public class OrganizationVo implements Serializable {
     public OrganizationVo() {
     }
 
+    public OrganizationVo(String name, String homePage, LocationVo location, UserVo admin) {
+        this.name = name;
+        this.homePage = homePage;
+        this.location = location;
+        this.admin = admin;
+    }
+
     public OrganizationVo(String id, String name, String homePage, LocationVo location, UserVo admin) {
         this.id = id;
         this.name = name;

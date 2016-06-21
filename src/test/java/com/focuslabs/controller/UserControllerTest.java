@@ -20,6 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.nio.charset.Charset;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -45,14 +46,14 @@ public class UserControllerTest {
     private WebApplicationContext webApplicationContext;
 
     @Autowired
-    UserRepository repository;
+    UserRepository userRepository;
     private User user;
 
     @Before
     public void setup() throws Exception {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
-            repository.deleteAll();
-            user = repository.save(new User("email@gmail.com","password","firstName","lastName","about Me","education level"));
+            userRepository.deleteAll();
+            user = userRepository.save(new User("email@gmail.com","password","firstName","lastName","about Me","education level"));
 
     }
 
@@ -105,6 +106,24 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.password", is("password")))
                 .andExpect(jsonPath("$.firstName", is("Nebyu")))
                 .andExpect(jsonPath("$.lastName", is("dawit")))
+                .andExpect(jsonPath("$.aboutMe", is("about Me")))
+                .andExpect(jsonPath("$.education", is("education level")));
+    }
+
+    @Test
+    public void createUser() throws Exception {
+        userRepository.deleteAll();
+        UserVo u = new UserVo("email@gmail.com","password","firstName","lastName","about Me","education level");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(u);
+        System.out.println(json);
+        mockMvc.perform(post("/users/create").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.email", is("email@gmail.com")))
+                .andExpect(jsonPath("$.password", is("password")))
+                .andExpect(jsonPath("$.firstName", is("firstName")))
+                .andExpect(jsonPath("$.lastName", is("lastName")))
                 .andExpect(jsonPath("$.aboutMe", is("about Me")))
                 .andExpect(jsonPath("$.education", is("education level")));
     }

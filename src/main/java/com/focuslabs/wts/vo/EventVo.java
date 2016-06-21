@@ -23,6 +23,17 @@ public class EventVo implements Serializable {
     public EventVo() {
     }
 
+    public EventVo(String title, Date date, String length, String shortDescription, String longDescription, String whereAbout, String eventIconLocation, String eventPictureLocation) {
+        this.title = title;
+        this.date = date;
+        this.length = length;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
+        this.whereAbout = whereAbout;
+        this.eventIconLocation = eventIconLocation;
+        this.eventPictureLocation = eventPictureLocation;
+    }
+
     public EventVo(String id, String title, Date date, String length, String shortDescription, String longDescription, String whereAbout, String eventIconLocation, String eventPictureLocation) {
         this.id = id;
         this.title = title;
