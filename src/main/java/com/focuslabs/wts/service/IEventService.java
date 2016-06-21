@@ -13,6 +13,7 @@ public interface IEventService {
     long getNumberOfEvents();
     List<Event> getAllEvents();
     Event getEvent(String eventId);
-    Event updateEvent(EventVo eventVo);
+    Event update(EventVo eventVo);
+    Event create(EventVo e);
 
 }

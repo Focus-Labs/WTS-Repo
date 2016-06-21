@@ -13,6 +13,7 @@ public interface IUserService {
     Long getNumberOfUsers();
     List<User> getAllUsers();
     User getUser(String userId);
-    User updateUser(UserVo user);
+    User update(UserVo user);
+    User create(UserVo user);
 
 }

@@ -39,7 +39,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User updateUser(UserVo user) {
+    public User create(UserVo user) {
+        return userRepository.save(new User(user.getEmail(),user.getPassword(),user.getFirstName(),user.getLastName(),user.getAboutMe(),user.getEducation()));
+    }
+
+    @Override
+    public User update(UserVo user) {
         User oldUser = userRepository.findOne(user.getId());
         if(oldUser != null) {
             oldUser.setEmail((user.getEmail() != null && !user.getEmail().isEmpty()) ? user.getEmail() : oldUser.getEmail());

@@ -13,6 +13,7 @@ public interface IOrganizationService {
     Long getNumberOfOrganizations();
     List<Organization> getAllOrganizations();
     Organization getOrganization(String organizationId);
-    Organization updateOrganization(OrganizationVo o);
+    Organization update(OrganizationVo o);
+    Organization create(OrganizationVo o) throws Exception;
 
 }
