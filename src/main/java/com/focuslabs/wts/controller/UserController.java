@@ -85,7 +85,8 @@ public class UserController {
             @ApiResponse(code = 200, message = "Success", response = UserVo.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")
+            @ApiResponse(code = 500, message = "Failure"),
+            @ApiResponse(code = 400, message = "Parameter Error")
     })
     @ApiImplicitParam(name = "userId", required = true, dataType = "string", paramType = "query", value = "unique user Id")
     public ResponseEntity<?> getUser(@RequestParam(value = "userId", required = true) String userId) {
@@ -102,25 +103,47 @@ public class UserController {
         return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(500));
     }
 
-    @RequestMapping(value = "/update",method = RequestMethod.PUT, produces = "application/json;charset=UTF-8", consumes = MediaType.ALL_VALUE)
+    @RequestMapping(value = "/update",method = RequestMethod.PUT, produces = "application/json;charset=UTF-8", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ApiOperation(value = "update user", notes = "return the modified user")
     @ApiResponses( value = {
             @ApiResponse(code = 200, message = "Success", response = UserVo.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")
+            @ApiResponse(code = 500, message = "Failure"),
+            @ApiResponse(code = 400, message = "Parameter Error")
     })
     public ResponseEntity<?> updateUser(@RequestBody UserVo user) {
         if(user != null) {
+            // TODO validate the fields with spring field validation
             try {
-                User u = userService.updateUser(user);
+                User u = userService.update(user);
                 UserVo user1 = new UserVo(u.getId(),u.getEmail(),u.getPassword(),u.getFirstName(),u.getLastName(),u.getAboutMe(),u.getEducation());
                 return new ResponseEntity<Object>(user1,HttpStatus.valueOf(200));
             } catch (Exception e) {
                 e.printStackTrace();
                 return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));
             }
+        }
+        return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(500));
+    }
+
+    @RequestMapping(value = "/create",method = RequestMethod.POST, produces = "application/json;charset=UTF-8", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ApiOperation(value = "create user", notes = "return the new user")
+    @ApiResponses( value = {
+            @ApiResponse(code = 200, message = "Success", response = UserVo.class),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure"),
+            @ApiResponse(code = 400, message = "Parameter Error")
+    })
+    public ResponseEntity<?> createUser(@RequestBody UserVo user) {
+        if(user != null) {
+            // TODO validate the fields with spring field validation
+            User u = userService.create(user);
+            UserVo user1 = new UserVo(u.getId(),u.getEmail(),u.getPassword(),u.getFirstName(),u.getLastName(),u.getAboutMe(),u.getEducation());
+            return new ResponseEntity<Object>(user1,HttpStatus.valueOf(200));
         }
         return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(500));
     }

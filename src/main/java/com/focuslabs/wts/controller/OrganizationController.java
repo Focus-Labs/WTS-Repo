@@ -90,7 +90,8 @@ public class OrganizationController {
             @ApiResponse(code = 200, message = "Success", response = OrganizationVo.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")
+            @ApiResponse(code = 500, message = "Failure"),
+            @ApiResponse(code = 400, message = "Parameter Error")
     })
     @ApiImplicitParam(name = "organizationId", required = true, dataType = "string", paramType = "query", value = "unique organization Id")
     public ResponseEntity<?> getOrganization(@RequestParam(value = "organizationId", required = true) String organizationId) {
@@ -117,12 +118,40 @@ public class OrganizationController {
             @ApiResponse(code = 200, message = "Success", response = OrganizationVo.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")
+            @ApiResponse(code = 500, message = "Failure"),
+            @ApiResponse(code = 400, message = "Parameter Error")
     })
     public ResponseEntity<?> updateOrganization(@RequestBody OrganizationVo organization) {
         if(organization != null) {
             try {
-                Organization o = organizationService.updateOrganization(organization);
+                Organization o = organizationService.update(organization);
+                LocationVo location = new LocationVo(o.getAddress().getId(),o.getAddress().getName());
+                User u = o.getAdmin();
+                UserVo admin = new UserVo(u.getId(),u.getEmail(),u.getPassword(),u.getFirstName(),u.getLastName(),u.getAboutMe(),u.getEducation());
+                OrganizationVo organization1 = new OrganizationVo(o.getId(),o.getName(),o.getHomepage(),location,admin);
+                return new ResponseEntity<Object>(organization1,HttpStatus.valueOf(200));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(400));
+            }
+        }
+        return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(500));
+    }
+
+    @RequestMapping(value = "/create",method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    @ApiOperation(value = "create organization", notes = "return the new organization")
+    @ApiResponses( value = {
+            @ApiResponse(code = 200, message = "Success", response = OrganizationVo.class),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure"),
+            @ApiResponse(code = 400, message = "Parameter Error")
+    })
+    public ResponseEntity<?> createOrganization(@RequestBody OrganizationVo organization) {
+        if(organization != null) {
+            try {
+                Organization o = organizationService.create(organization);
                 LocationVo location = new LocationVo(o.getAddress().getId(),o.getAddress().getName());
                 User u = o.getAdmin();
                 UserVo admin = new UserVo(u.getId(),u.getEmail(),u.getPassword(),u.getFirstName(),u.getLastName(),u.getAboutMe(),u.getEducation());
@@ -133,7 +162,9 @@ public class OrganizationController {
                 return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));
             }
         }
-        return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(500));
+        return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(400));
     }
+
+
 
 }

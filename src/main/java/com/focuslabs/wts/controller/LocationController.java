@@ -75,7 +75,8 @@ public class LocationController {
             @ApiResponse(code = 200, message = "Success", response = LocationVo.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")
+            @ApiResponse(code = 500, message = "Failure"),
+            @ApiResponse(code = 400, message = "Parameter Error")
     })
     @ApiImplicitParam(name = "locationId", required = true, dataType = "string", paramType = "query", value = "unique location Id")
     public ResponseEntity<?> getLocation(@RequestParam(value = "locationId", required = true) String locationId) {
@@ -89,7 +90,7 @@ public class LocationController {
                 return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));
             }
         }
-        return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(500));
+        return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(400));
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.PUT, produces = "application/json;charset=UTF-8")
@@ -99,12 +100,13 @@ public class LocationController {
             @ApiResponse(code = 200, message = "Success", response = LocationVo.class),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")
+            @ApiResponse(code = 500, message = "Failure"),
+            @ApiResponse(code = 400, message = "Parameter Error")
     })
     public ResponseEntity<?> updateLocation(@RequestBody LocationVo locationVo) {
         if(locationVo != null) {
             try {
-                Location l = locationService.updateLocation(locationVo);
+                Location l = locationService.update(locationVo);
                 LocationVo location = new LocationVo(l.getId(),l.getName());
                 return new ResponseEntity<Object>(location, HttpStatus.valueOf(200));
             } catch (Exception e) {
@@ -112,7 +114,31 @@ public class LocationController {
                 return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));
             }
         }
-        return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(500));
+        return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(400));
+    }
+
+    @RequestMapping(value = "/create",method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    @ApiOperation(value = "create location", notes = "return the new location")
+    @ApiResponses( value = {
+            @ApiResponse(code = 200, message = "Success", response = LocationVo.class),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure"),
+            @ApiResponse(code = 400, message = "Parameter Error")
+    })
+    public ResponseEntity<?> createLocation(@RequestBody LocationVo locationVo) {
+        if(locationVo != null) {
+            try {
+                Location l = locationService.create(locationVo);
+                LocationVo location = new LocationVo(l.getId(),l.getName());
+                return new ResponseEntity<Object>(location, HttpStatus.valueOf(200));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResponseEntity<Object>(e.getMessage(), HttpStatus.valueOf(500));
+            }
+        }
+        return new ResponseEntity<Object>("Parameter Error", HttpStatus.valueOf(400));
     }
 
 
