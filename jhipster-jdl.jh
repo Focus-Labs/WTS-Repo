@@ -1,0 +1,109 @@
+
+
+entity Person{
+    personId Long
+    email String
+    firstName String
+    lastName String
+    aboutMe String
+    education String
+       
+}
+    
+entity Trip{
+    tripId Long
+    fromDate ZonedDateTime
+    toDate ZonedDateTime
+}
+
+entity Location{
+    locationId Long
+    latitude Float
+    longitude Float
+    name String
+}
+
+entity Message{
+    messageId Long
+    message String
+    isRead Boolean
+    timeStamp ZonedDateTime
+}
+
+entity Notification{
+    notificationId Long
+    message String
+    timeStamp ZonedDateTime
+    isRead Boolean
+}
+
+entity Organization{
+    organizationId Long
+    name String
+    homePage String
+}
+
+entity Rating{
+    ratingId Long
+    review String
+    value Integer
+}
+
+entity Skill{
+    skillId Long
+    name String
+    category Category
+}
+
+enum Category{
+    SOFTWARE_DEVELOPMENT, MARKETING
+}
+
+entity Story{
+    storyId Long
+    title String
+    body String
+}
+
+relationship ManyToOne{
+    Trip{location} to Location
+}
+
+relationship OneToMany{
+     Person{trip} to Trip{traveler}
+}
+
+relationship OneToMany{
+    Person{sentMessage} to Message{sender}
+}
+relationship OneToMany{
+    Person{receivedMessage} to Message{receiver}
+}
+
+relationship OneToMany{
+     Person{organization} to Organization{admin}
+}
+
+relationship OneToMany{
+     Location{organization} to Organization{location}
+}
+
+relationship OneToMany{
+     Person{rating} to Rating{rater}
+}
+
+relationship OneToMany{
+     Organization{rating} to Rating{organiztion}
+}
+
+relationship ManyToMany{
+    Person{skill} to Skill{person}
+}
+
+relationship OneToMany{
+     Person{story} to Story{person}
+}
+
+relationship OneToMany{
+     Location{story} to Story{location}
+}
