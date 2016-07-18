@@ -1,15 +1,31 @@
 package com.focuslabs.wts.repository;
 
-import com.focuslabs.wts.entity.User;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import com.focuslabs.wts.domain.User;
+
+import java.time.ZonedDateTime;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
- * Created by baba on 6/12/2016.
+ * Spring Data JPA repository for the User entity.
  */
-@Repository
-public interface UserRepository extends MongoRepository<User,String> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    public User findByEmail(String email);
+    Optional<User> findOneByActivationKey(String activationKey);
+
+    List<User> findAllByActivatedIsFalseAndCreatedDateBefore(ZonedDateTime dateTime);
+
+    Optional<User> findOneByResetKey(String resetKey);
+
+    Optional<User> findOneByEmail(String email);
+
+    Optional<User> findOneByLogin(String login);
+
+    Optional<User> findOneById(Long userId);
+
+    @Override
+    void delete(User t);
 
 }
